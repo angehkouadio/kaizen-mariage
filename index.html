@@ -1337,6 +1337,53 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
 }
 </style>
 
+
+<style id="mobile-method-readable-cards">
+@media(max-width:780px){
+  .annual-path-table,.annual-path-table tbody,.annual-path-table tr,.annual-path-table th,.annual-path-table td,
+  .example-table,.example-table tbody,.example-table tr,.example-table th,.example-table td{
+    display:block!important;width:100%!important;min-width:0!important;max-width:none!important;
+  }
+  .annual-path-table,.example-table{
+    overflow:visible!important;border-collapse:separate!important;border-spacing:0!important;
+  }
+  .annual-path-table tr,.example-table tr{
+    margin:0 0 11px!important;padding:13px 14px!important;border:1px solid var(--line)!important;
+    border-radius:14px!important;background:var(--card-2)!important;
+  }
+  .annual-path-table tr:last-child,.example-table tr:last-child{margin-bottom:0!important}
+  .annual-path-table th,.annual-path-table td,.example-table th,.example-table td{
+    border:0!important;padding:0!important;background:transparent!important;
+    word-break:normal!important;overflow-wrap:normal!important;white-space:normal!important;
+  }
+
+  .annual-path-table th{
+    display:inline-flex!important;width:auto!important;margin:0 0 8px!important;padding:5px 9px!important;
+    border-radius:999px!important;background:var(--soft)!important;color:var(--accent-deep)!important;
+    font-size:12px!important;line-height:1.2!important;font-weight:800!important;
+    text-transform:none!important;letter-spacing:0!important;
+  }
+  .annual-path-table td{
+    font-size:13.5px!important;line-height:1.5!important;color:var(--ink)!important;
+  }
+  .annual-path-table td strong{
+    display:block;margin-bottom:3px;color:var(--accent-deep);font-size:15px;
+  }
+
+  .example-table th{
+    display:block!important;width:100%!important;margin:0 0 7px!important;color:var(--accent)!important;
+    font-size:11px!important;line-height:1.2!important;font-weight:900!important;
+    text-transform:uppercase!important;letter-spacing:.08em!important;
+  }
+  .example-table td{
+    font-size:13.5px!important;line-height:1.55!important;color:var(--ink)!important;
+  }
+
+  #method .card{overflow:visible!important}
+  #method .card h2{margin-bottom:10px!important}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -1491,8 +1538,8 @@ Parcours conjugal &amp; spirituel · 52 semaines <span class="journey-info-symbo
 <p><strong>5. Une réparation doit devenir concrète.</strong> Une explication éclaire ; un comportement nouveau reconstruit.</p>
 </div>
 
-<div class="card span-6"><h2>Le parcours annuel</h2>
-<table><tbody>
+<div class="card span-6 mobile-card-table"><h2>Le parcours annuel</h2>
+<table class="annual-path-table"><tbody>
 <tr><th>Semaines 1–13</th><td><strong>Sécuriser</strong><br>Faire diminuer l'escalade et créer un cadre de dialogue.</td></tr>
 <tr><th>Semaines 14–26</th><td><strong>Comprendre</strong><br>Identifier blessures, émotions, besoins et cycles répétitifs.</td></tr>
 <tr><th>Semaines 27–39</th><td><strong>Réparer</strong><br>Assumer sa part, demander pardon et modifier les comportements.</td></tr>
@@ -1505,8 +1552,8 @@ Parcours conjugal &amp; spirituel · 52 semaines <span class="journey-info-symbo
 <p>Chaque semaine comporte un <strong>travail relationnel</strong> et un <strong>exercice spirituel</strong>. Chaque mois comporte un bilan. Toutes les treize semaines, vous faites une révision plus profonde de la phase terminée.</p>
 </div>
 
-<div class="card span-12"><h2>Exemple</h2>
-<table><tbody>
+<div class="card span-12 mobile-card-table"><h2>Exemple</h2>
+<table class="example-table"><tbody>
 <tr><th>Observation</th><td>Après une parole blessante, l'un se retire et l'autre insiste pour continuer.</td></tr>
 <tr><th>Cycle</th><td>Blessure → retrait → poursuite → sentiment d'étouffement → retrait plus fort → sentiment d'abandon → escalade.</td></tr>
 <tr><th>Petit changement</th><td>« Je suis trop bouleversé pour continuer correctement. J'ai besoin d'une pause. Je ne t'abandonne pas. Nous reprendrons cette discussion. »</td></tr>
