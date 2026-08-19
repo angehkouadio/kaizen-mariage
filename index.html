@@ -1090,6 +1090,83 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
 }
 </style>
 
+
+<style id="journey-info-fix-final">
+@media(max-width:780px){
+  .journey-info-title{
+    display:inline-flex!important;
+    align-items:center;
+    gap:7px;
+    cursor:pointer;
+    max-width:calc(100% - 104px)!important;
+    color:#f0cfa0!important;
+  }
+  .journey-info-symbol{
+    display:inline-flex!important;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+    width:18px;
+    height:18px;
+    border:1px solid rgba(240,207,160,.78);
+    border-radius:50%;
+    color:#f0cfa0!important;
+    font-size:11px!important;
+    font-family:var(--sans);
+    font-weight:800;
+    line-height:1;
+  }
+  .journey-info-popover{
+    position:absolute;
+    z-index:140;
+    left:14px;
+    right:14px;
+    top:calc(56px + env(safe-area-inset-top));
+    padding:14px 40px 14px 14px;
+    border-radius:15px;
+    background:rgba(35,25,18,.97);
+    color:#fff7e9;
+    border:1px solid rgba(243,220,192,.25);
+    box-shadow:0 16px 38px rgba(0,0,0,.30);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    font-family:var(--sans);
+    font-size:12px;
+    line-height:1.5;
+  }
+  .journey-info-popover strong{
+    display:block;
+    color:#f0cfa0;
+    margin-bottom:5px;
+    font-size:13px;
+  }
+  .journey-info-popover p{
+    margin:0;
+    font-size:12px;
+    line-height:1.5;
+  }
+  .journey-info-close{
+    position:absolute;
+    right:8px;
+    top:7px;
+    width:28px;
+    height:28px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+    color:#fff;
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+  }
+}
+@media(min-width:781px){
+  .journey-info-symbol{display:none!important}
+  .journey-info-title{cursor:default!important}
+  .journey-info-popover{display:none!important}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -1100,12 +1177,21 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
   <p>52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p>
 </div>
 
+
+<div class="journey-info-popover" id="journeyInfoPopover" hidden>
+  <button type="button" class="journey-info-close" onclick="toggleJourneyInfo(false);event.stopPropagation()" aria-label="Fermer">×</button>
+  <strong>Kaizen du Mariage — 1 an</strong>
+  <p>52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p>
+</div>
+
 <div class="header-tools">
 <button class="hbtn" id="guideBtn" type="button" aria-label="Guide d'utilisation" title="Comment utiliser l'outil" onclick="switchTab('guide')">?</button>
 <button class="hbtn" id="themeToggle" type="button" aria-label="Basculer entre le thème clair et sombre" title="Thème clair / sombre"></button>
 </div>
 <div class="wrap hero">
-<div><span class="eyebrow">Parcours conjugal &amp; spirituel · 52 semaines</span><h1 onclick="toggleTitleInfo()" role="button" tabindex="0" aria-expanded="false">Kaizen du Mariage — 1 an</h1><p class="subtitle">52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p></div>
+<div><span class="eyebrow journey-info-title" onclick="toggleJourneyInfo()" role="button" tabindex="0" aria-expanded="false">
+Parcours conjugal &amp; spirituel · 52 semaines <span class="journey-info-symbol" aria-hidden="true">ⓘ</span>
+</span><h1 onclick="toggleTitleInfo()" role="button" tabindex="0" aria-expanded="false">Kaizen du Mariage — 1 an</h1><p class="subtitle">52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p></div>
 <div class="hero-card"><div class="small">Le principe</div><strong>Un petit progrès fidèle, humain et spirituel, répété dans le temps.</strong></div>
 </div>
 </header>
