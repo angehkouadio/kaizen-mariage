@@ -790,6 +790,35 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
 }
 </style>
 
+
+<style id="safety-icon-popover">
+.info-mark{
+  appearance:none;-webkit-appearance:none;cursor:pointer;color:#f3dcc0;
+  padding:0;font:inherit;
+}
+.info-mark:active{transform:scale(.96)}
+.safety-popover{
+  position:absolute;z-index:12;left:0;top:72px;width:min(430px,calc(100% - 8px));
+  padding:15px 42px 15px 15px;border-radius:16px;
+  background:rgba(35,25,18,.96);color:#fff7e9;
+  border:1px solid rgba(243,220,192,.25);
+  box-shadow:0 16px 38px rgba(0,0,0,.30);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font-family:var(--sans);font-size:13px;line-height:1.5;
+}
+.safety-popover strong{display:block;color:#f0cfa0;margin-bottom:5px}
+.safety-popover p{font-size:13px;line-height:1.5;margin:0}
+.safety-close{
+  position:absolute;right:9px;top:8px;width:30px;height:30px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.10);color:#fff;font-size:22px;line-height:1;cursor:pointer;
+}
+@media(max-width:780px){
+  .welcome-mark.info-mark{border:1px solid rgba(255,255,255,.22)}
+  .safety-popover{top:64px;width:100%;font-size:12px}
+  .safety-popover p{font-size:12px}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -804,7 +833,6 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
 </header>
 
 <main class="wrap">
-<div class="notice">Ce parcours accompagne le dialogue et la vie spirituelle du couple. Il ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale. En cas de violence, menace, coercition ou peur, la priorité est la sécurité.</div>
 
 <nav class="tabs">
 <button class="tab-btn active" data-tab="home">Accueil</button>
@@ -823,7 +851,14 @@ footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;
 <div class="mobile-home">
   <div class="card welcome-card span-12" style="width:100%">
     <div class="welcome-inner">
-      <div class="welcome-mark" aria-hidden="true"><svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"><circle cx="0" cy="-15" r="21"/><circle cx="13" cy="8" r="21"/><circle cx="-13" cy="8" r="21"/></svg></div>
+      <button class="welcome-mark info-mark" type="button" onclick="toggleSafetyInfo()" aria-label="Informations importantes sur le parcours" aria-expanded="false">
+<svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"><circle cx="0" cy="-15" r="21"/><circle cx="13" cy="8" r="21"/><circle cx="-13" cy="8" r="21"/></svg>
+</button>
+<div class="safety-popover" id="safetyPopover" hidden>
+  <button class="safety-close" type="button" onclick="toggleSafetyInfo(false)" aria-label="Fermer">×</button>
+  <strong>À savoir</strong>
+  <p>Ce parcours accompagne le dialogue et la vie spirituelle du couple. Il ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale. En cas de violence, menace, coercition ou peur, la priorité est la sécurité.</p>
+</div>
       <span class="badge" style="width:max-content;background:rgba(255,255,255,.15);color:#fff">Kaizen du Mariage · 52 semaines</span>
       <div class="verse">« Par-dessus tout cela, ayez l’amour, qui est le lien de la perfection. »</div>
       <div class="verse-ref">Colossiens 3,14</div>
@@ -1302,5 +1337,24 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
   updateAvg();
 })();
 </script>
+
+<script>
+function toggleSafetyInfo(force){
+  const box=document.getElementById("safetyPopover");
+  const btn=document.querySelector(".info-mark");
+  if(!box) return;
+  const show = typeof force==="boolean" ? force : box.hasAttribute("hidden");
+  if(show) box.removeAttribute("hidden"); else box.setAttribute("hidden","");
+  if(btn) btn.setAttribute("aria-expanded", show ? "true" : "false");
+}
+document.addEventListener("click",function(e){
+  const box=document.getElementById("safetyPopover");
+  const btn=document.querySelector(".info-mark");
+  if(box && !box.hasAttribute("hidden") && !box.contains(e.target) && !btn?.contains(e.target)){
+    toggleSafetyInfo(false);
+  }
+});
+</script>
+
 </body>
 </html>
