@@ -1,0 +1,24 @@
+{
+  "name": "Kaizen du Mariage — Parcours d'un an",
+  "short_name": "Kaizen Mariage",
+  "description": "Parcours relationnel et spirituel de 52 semaines pour le couple.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ee",
+  "theme_color": "#6f4935",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

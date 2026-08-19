@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#6f4935">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kaizen Mariage">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>Kaizen du Mariage — Parcours d'un an</title>
+<style>
+/* ============================================================
+   Kaizen du Mariage — habillage « Parchemin & Rubrique »
+   Palette liturgique : cacao · vin (rubrique) · or · olivaie
+   Thème clair + thème sombre « à la bougie »
+   ============================================================ */
+:root{
+  color-scheme:light;
+  --bg:#f2ece0; --bg2:#e9e0d0;
+  --card:#fffdf8; --card-2:#fbf6ec;
+  --ink:#2a2621; --muted:#7c7164; --faint:#a99d8c;
+  --line:#e6ddce; --line-soft:#efe8db;
+  --field-bg:#fffdf8;
+  --soft:#efe6d5;
+  --accent:#6d4a34; --accent-deep:#543726; --accent-ink:#fffdf8;
+  --rubric:#8c2f39;                 /* vin liturgique — marques structurantes */
+  --gold:#a9772f; --gold-soft:#f3e6cb;
+  --olive:#5c7a52;                  /* état « accompli » */
+  --danger:#9a4949; --danger-soft:#f4dede;
+  --hero-a:#41291d; --hero-b:#734c36; --hero-c:#a5744f;
+  --ph0:#6d4a34; --ph1:#8c2f39; --ph2:#a9772f; --ph3:#5c7a52;
+  --notice-bg:#fbf1db; --notice-ink:#6a4f1e; --notice-border:rgba(169,119,47,.4);
+  --shadow:0 1px 2px rgba(60,40,25,.05), 0 14px 34px rgba(70,48,30,.09);
+  --shadow-sm:0 1px 2px rgba(60,40,25,.06), 0 6px 16px rgba(70,48,30,.07);
+  --radius:20px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#181310; --bg2:#201811;
+  --card:#241d16; --card-2:#2b231a;
+  --ink:#efe5d6; --muted:#a89b88; --faint:#877966;
+  --line:#392f24; --line-soft:#322a20;
+  --field-bg:#2b2219;
+  --soft:#332a20;
+  --accent:#c99b73; --accent-deep:#e0b98f; --accent-ink:#231a11;
+  --rubric:#df9096;
+  --gold:#d6a55c; --gold-soft:#33291a;
+  --olive:#8fb07d;
+  --danger:#e0a3a3; --danger-soft:#3a2323;
+  --hero-a:#33221a; --hero-b:#5a3c2b; --hero-c:#7e553a;
+  --ph0:#c99b73; --ph1:#df9096; --ph2:#d6a55c; --ph3:#8fb07d;
+  --notice-bg:#2f2617; --notice-ink:#ecd6a6; --notice-border:rgba(214,165,92,.3);
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 16px 40px rgba(0,0,0,.55);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4), 0 8px 18px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--sans);color:var(--ink);line-height:1.55;letter-spacing:.005em;min-height:100vh;
+  background:
+    radial-gradient(1100px 680px at 84% -10%, rgba(180,140,60,.10), transparent 60%),
+    radial-gradient(820px 560px at -6% 6%, rgba(140,47,57,.06), transparent 55%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+}
+
+/* Typographie */
+h1,h2,h3,.metric,.verse,.quote{font-family:var(--serif)}
+h1{font-size:clamp(30px,5vw,46px);margin:0;line-height:1.06;letter-spacing:-.01em;font-weight:600}
+h2{font-size:clamp(20px,2.4vw,26px);margin:0 0 10px;line-height:1.15;letter-spacing:-.01em;font-weight:600}
+h3{font-size:18px;margin:0 0 8px;font-weight:600}
+p{margin:0 0 10px}p:last-child{margin-bottom:0}
+.muted{color:var(--muted)}.small{font-size:13px}
+.metric{font-size:34px;font-weight:600;color:var(--accent);letter-spacing:-.01em;line-height:1}
+.eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:800}
+
+/* En-tête */
+header{position:relative;padding:34px 18px 26px;color:#fdf6ee;overflow:hidden;
+  background:linear-gradient(135deg,var(--hero-a),var(--hero-b) 62%,var(--hero-c))}
+header:before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(560px 300px at 88% -30%, rgba(255,255,255,.12), transparent 60%)}
+header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,var(--rubric),var(--gold),var(--olive))}
+.wrap{max-width:1180px;margin:auto}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:1.5fr .8fr;gap:20px;align-items:end}
+.hero .eyebrow{display:block;color:#f0cfa0;margin-bottom:10px}
+.subtitle{color:#f1ddca;max-width:760px;margin:10px 0 0;font-size:15px}
+.hero-card{padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);backdrop-filter:blur(4px)}
+.hero-card .small{color:#f0cfa0;text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:11px}
+.hero-card strong{font-family:var(--serif);font-weight:500;font-size:16px;display:block;margin-top:6px;line-height:1.4}
+.theme-toggle{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;z-index:3;
+  width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;
+  backdrop-filter:blur(6px);transition:.16s}
+.theme-toggle:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.theme-toggle svg{width:20px;height:20px}
+
+/* Corps + onglets */
+main{padding:24px 16px 60px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:20;padding:12px 0;margin-bottom:18px;background:var(--bg)}
+.tab-btn{font-family:var(--sans);border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:9px 15px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;transition:.18s;box-shadow:var(--shadow-sm)}
+.tab-btn:hover{color:var(--ink);border-color:var(--accent);transform:translateY(-1px)}
+.tab-btn.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 8px 18px rgba(90,60,35,.22)}
+
+.panel{display:none}
+.panel.active{display:block;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+
+/* Cartes */
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card h2:first-child,.card h3:first-child{margin-top:0}
+.card>.badge:first-child{margin-bottom:10px}
+
+/* Puce rubrique */
+.badge{font-family:var(--sans);display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;
+  background:var(--soft);color:var(--accent-deep);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;border:1px solid var(--line-soft)}
+
+/* Citation / Écriture */
+.quote{font-family:var(--serif);font-size:16px;line-height:1.6;border-left:3px solid var(--gold);
+  padding:12px 16px;background:var(--card-2);border-radius:0 12px 12px 0;color:var(--ink)}
+.quote strong{font-family:var(--sans)}
+
+/* Avertissement */
+.notice{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--notice-bg);
+  border:1px solid var(--notice-border);color:var(--notice-ink);border-radius:16px;padding:14px 16px;margin-bottom:18px;font-size:14px;line-height:1.5}
+.notice:before{content:"";flex:0 0 4px;align-self:stretch;border-radius:4px;background:var(--rubric)}
+
+/* Progression */
+.progress-track{position:relative;height:14px;background:var(--soft);border-radius:999px;overflow:hidden;border:1px solid var(--line-soft)}
+.progress-bar{height:100%;width:0;border-radius:999px;transition:width .6s ease;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.12) 0 7px, transparent 7px 14px),
+    linear-gradient(90deg, var(--gold), var(--accent))}
+
+/* Boutons */
+button.primary,button.secondary,button.danger{font-family:var(--sans);border:0;border-radius:12px;padding:11px 16px;font-weight:800;font-size:14px;cursor:pointer;transition:.16s}
+button.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 16px rgba(90,60,35,.22)}
+button.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+button.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+button.secondary:hover{border-color:var(--accent);transform:translateY(-1px)}
+button.danger{background:var(--danger-soft);color:var(--danger)}
+button.danger:hover{filter:brightness(1.03);transform:translateY(-1px)}
+:where(button,a,input,textarea,select,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.data-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+/* Journal daté & historique des notes */
+.journal-compose{display:grid;gap:10px}
+.journal-compose .row{display:flex;justify-content:flex-end;gap:8px}
+.entry{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px;background:var(--card-2)}
+.entry-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.entry-date{font-size:11.5px;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.entry-text{white-space:pre-wrap;line-height:1.55}
+.entry-actions{display:flex;gap:4px;flex:0 0 auto}
+.icon-btn{border:0;background:transparent;color:var(--muted);cursor:pointer;font-weight:800;font-size:12.5px;padding:4px 9px;border-radius:8px;transition:.14s}
+.icon-btn:hover{background:var(--soft);color:var(--ink)}
+.icon-btn.del:hover{background:var(--danger-soft);color:var(--danger)}
+.empty{color:var(--faint);font-size:13.5px;margin-top:8px}
+.note-hist{margin-top:2px}
+.hist-toggle{border:0;background:transparent;color:var(--accent);font-family:var(--sans);font-weight:800;font-size:12px;cursor:pointer;padding:2px 0}
+.hist-toggle:hover{text-decoration:underline}
+.hist-list{margin-top:8px;display:grid;gap:8px}
+.hist-item{border-left:2px solid var(--line-soft);padding:5px 10px}
+.hist-date{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.hist-text{white-space:pre-wrap;font-size:13.5px;line-height:1.5;margin:3px 0}
+.hist-actions{display:flex;gap:4px}
+
+/* Champs */
+textarea,input[type=text],input[type=email],input[type=password],select{
+  width:100%;font:inherit;font-family:var(--sans);color:var(--ink);background:var(--field-bg);
+  border:1px solid var(--line);border-radius:12px;padding:11px 13px;transition:border-color .15s, box-shadow .15s}
+textarea{min-height:96px;resize:vertical;line-height:1.5}
+textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(109,74,52,.14);outline:none}
+::placeholder{color:var(--faint)}
+.field{display:grid;gap:7px;margin-bottom:14px}
+.field label{font-weight:700;font-size:13.5px;color:var(--ink)}
+
+/* Cases quotidiennes */
+.checkline{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.checkline input{margin-top:3px;transform:scale(1.2);accent-color:var(--accent)}
+.day-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.day-head input[type=checkbox]{transform:scale(1.25);accent-color:var(--olive);cursor:pointer}
+
+/* Parcours 52 semaines */
+.week-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 12px}
+.week-title h2{margin:0}
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.week-card{position:relative;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:16px;padding:16px 16px 16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:var(--shadow-sm);transition:.18s}
+.week-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.week-card h3{margin:2px 0 0}
+.week-card strong{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}
+.week-card .field{margin-bottom:0}
+.week-card.done{background:linear-gradient(0deg, rgba(92,122,82,.07), rgba(92,122,82,.07)), var(--card)}
+.week-card.done:before{content:"✓";position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;
+  background:var(--olive);color:#fff;font-size:13px;font-weight:900;display:grid;place-items:center}
+.week-grid[data-phase="0"] .week-card{border-left-color:var(--ph0)}
+.week-grid[data-phase="1"] .week-card{border-left-color:var(--ph1)}
+.week-grid[data-phase="2"] .week-card{border-left-color:var(--ph2)}
+.week-grid[data-phase="3"] .week-card{border-left-color:var(--ph3)}
+.week-grid[data-phase="0"] .week-card .badge{color:var(--ph0)}
+.week-grid[data-phase="1"] .week-card .badge{color:var(--ph1)}
+.week-grid[data-phase="2"] .week-card .badge{color:var(--ph2)}
+.week-grid[data-phase="3"] .week-card .badge{color:var(--ph3)}
+.week-grid .week-card.done{border-left-color:var(--olive)}
+.week-title[data-phase="0"] .badge{color:var(--ph0)}
+.week-title[data-phase="1"] .badge{color:var(--ph1)}
+.week-title[data-phase="2"] .badge{color:var(--ph2)}
+.week-title[data-phase="3"] .badge{color:var(--ph3)}
+
+/* Tableaux */
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--card-2);font-family:var(--sans);font-weight:800;color:var(--accent-deep);font-size:13px;letter-spacing:.02em}
+tr:last-child td{border-bottom:0}
+
+/* Curseurs */
+.slider-row{display:grid;grid-template-columns:190px 1fr 54px;gap:14px;align-items:center;margin:14px 0}
+.slider-row label{font-weight:700;font-size:14px}
+input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;cursor:pointer;accent-color:var(--accent);
+  background:linear-gradient(90deg,var(--accent),var(--gold)) left/var(--p,50%) 100% no-repeat, var(--soft)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:var(--shadow-sm)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:var(--shadow-sm)}
+input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:transparent}
+.slider-row output{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--accent);text-align:center;background:var(--soft);border-radius:10px;padding:5px 0}
+
+/* Synthèse indicateurs */
+.metric-summary{display:flex;align-items:center;gap:16px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.gauge{--g:50%;flex:0 0 64px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--accent) var(--g), var(--soft) 0)}
+.gauge>span{width:48px;height:48px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--accent)}
+.metric-summary .lbl{font-weight:700}
+.metric-summary .sub{color:var(--muted);font-size:13px;margin-top:2px}
+
+/* Pied */
+footer{padding:28px 18px 34px;text-align:center;color:var(--muted);font-size:13px}
+footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+/* Coquille mobile — accueil */
+.mobile-home{min-height:calc(100vh - 170px);display:flex;align-items:stretch}
+.welcome-card{position:relative;overflow:hidden;color:#fdf6ee;border:0;min-height:520px;padding:30px;border-radius:26px;
+  background:linear-gradient(160deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-c) 100%);box-shadow:0 24px 60px rgba(50,32,20,.35)}
+.welcome-card:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-110px;top:-90px;background:rgba(255,255,255,.07)}
+.welcome-card:before{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--rubric),var(--gold),var(--olive))}
+.welcome-inner{position:relative;z-index:1;display:flex;flex-direction:column;min-height:460px}
+.welcome-mark{width:72px;height:72px;border-radius:20px;background:rgba(255,255,255,.13);display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);margin-bottom:26px}
+.welcome-mark svg{width:42px;height:42px;color:#f3dcc0}
+.verse{font-family:var(--serif);font-size:clamp(25px,5.5vw,38px);line-height:1.28;margin:12px 0 14px;max-width:850px;font-weight:500}
+.verse:before{content:"";display:block;width:46px;height:2px;background:var(--gold);opacity:.85;margin-bottom:18px}
+.verse-ref{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:#f2d3b4}
+.encouragement{margin-top:26px;padding:18px;border-radius:18px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);line-height:1.65;font-size:15px}
+.welcome-actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;padding-top:24px}
+.welcome-actions button{font-family:var(--sans);background:#fff;color:#5a3a28;border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer;transition:.16s}
+.welcome-actions button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.2)}
+.welcome-actions button:first-child{background:var(--gold);color:#3a2a12}
+.sync-pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 12px;background:rgba(255,255,255,.12);color:#f3e7db;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.16)}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#e0a24a;box-shadow:0 0 0 3px rgba(224,162,74,.22)}
+.sync-pill.online .sync-dot{background:#8fca8a;box-shadow:0 0 0 3px rgba(143,202,138,.22)}
+
+/* Navigation basse */
+.bottom-nav{display:none}
+
+@media(max-width:780px){
+  body{padding-bottom:80px}
+  header{padding:calc(16px + env(safe-area-inset-top)) 16px 16px}
+  header .hero-card{display:none}
+  header h1{font-size:26px}
+  header .subtitle{font-size:13px}
+  header .eyebrow{margin-bottom:8px}
+  main{padding:12px 12px 90px}
+  .tabs{display:none}
+  .card{border-radius:18px;padding:16px}
+  .grid{gap:12px}
+  .welcome-card{min-height:calc(100vh - 210px);border-radius:24px;padding:24px}
+  .welcome-inner{min-height:calc(100vh - 255px)}
+  .verse{font-size:28px}
+  .week-grid{grid-template-columns:1fr}
+  .week-card{padding:16px 16px 16px 18px}
+  .slider-row{grid-template-columns:1fr auto;grid-template-areas:"label out" "range range";gap:8px 12px}
+  .slider-row label{grid-area:label}
+  .slider-row output{grid-area:out}
+  .slider-row input[type=range]{grid-area:range}
+  table{font-size:13px;display:block;overflow-x:auto}
+  .span-4,.span-6,.span-8,.span-12{grid-column:span 12}
+  .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;z-index:60;
+    left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    box-shadow:0 14px 40px rgba(40,28,18,.22);padding:8px;backdrop-filter:blur(14px)}
+  .bottom-nav button{border:0;background:transparent;padding:8px 3px;border-radius:14px;font-size:10px;font-weight:800;
+    color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
+  .bottom-nav button .ico{display:grid;place-items:center}
+  .bottom-nav button .ico svg{width:22px;height:22px}
+  .bottom-nav button.active{background:var(--soft);color:var(--accent)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .panel.active{animation:none}
+  *{scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
+
+@media print{
+  .tabs,button,.hero-card,.theme-toggle,.bottom-nav,.notice{display:none!important}
+  #home{display:none!important}
+  .panel{display:block!important;animation:none}
+  body{background:#fff}
+  .card,.week-card{box-shadow:none;break-inside:avoid;border-color:#ccc}
+  header{background:#fff;color:#000;border-bottom:2px solid #000}
+  header:after{display:none}
+  .hero .eyebrow,.subtitle{color:#333}
+}
+
+</style>
+</head>
+<body>
+<header>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Basculer entre le thème clair et sombre" title="Thème clair / sombre"></button>
+<div class="wrap hero">
+<div><span class="eyebrow">Parcours conjugal &amp; spirituel · 52 semaines</span><h1>Kaizen du Mariage — 1 an</h1><p class="subtitle">52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p></div>
+<div class="hero-card"><div class="small">Le principe</div><strong>Un petit progrès fidèle, humain et spirituel, répété dans le temps.</strong></div>
+</div>
+</header>
+
+<main class="wrap">
+<div class="notice">Ce parcours accompagne le dialogue et la vie spirituelle du couple. Il ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale. En cas de violence, menace, coercition ou peur, la priorité est la sécurité.</div>
+
+<nav class="tabs">
+<button class="tab-btn active" data-tab="home">Accueil</button>
+<button class="tab-btn" data-tab="method">Comprendre la méthode</button>
+<button class="tab-btn" data-tab="dashboard">Tableau de bord</button>
+<button class="tab-btn" data-tab="year">Parcours 52 semaines</button>
+<button class="tab-btn" data-tab="spiritual">Vie spirituelle</button>
+<button class="tab-btn" data-tab="wounds">Blessures</button>
+<button class="tab-btn" data-tab="weekly">Réunion hebdo</button>
+<button class="tab-btn" data-tab="monthly">Bilan mensuel</button>
+<button class="tab-btn" data-tab="metrics">Suivi</button>
+</nav>
+
+<section class="panel active" id="home">
+<div class="mobile-home">
+  <div class="card welcome-card span-12" style="width:100%">
+    <div class="welcome-inner">
+      <div class="welcome-mark" aria-hidden="true"><svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"><circle cx="0" cy="-15" r="21"/><circle cx="13" cy="8" r="21"/><circle cx="-13" cy="8" r="21"/></svg></div>
+      <span class="badge" style="width:max-content;background:rgba(255,255,255,.15);color:#fff">Kaizen du Mariage · 52 semaines</span>
+      <div class="verse">« Par-dessus tout cela, ayez l’amour, qui est le lien de la perfection. »</div>
+      <div class="verse-ref">Colossiens 3,14</div>
+      <div class="encouragement">
+        Votre histoire ne se résume pas aux blessures accumulées. Aujourd’hui, vous n’avez pas besoin de tout résoudre : choisissez simplement un geste plus doux, une parole plus vraie, une écoute plus profonde et un pas de plus vers l’autre.
+      </div>
+      <div style="margin-top:18px"><span class="sync-pill online"><span class="sync-dot"></span><span>Enregistré sur cet appareil</span></span></div>
+      <div class="welcome-actions">
+        <button onclick="openCurrent()">Continuer mon parcours</button>
+        <button onclick="switchTab('spiritual')">Prier aujourd'hui</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="panel" id="method">
+<div class="grid">
+<div class="card span-12"><span class="badge">Avant de commencer</span><h2 style="margin-top:12px">Kaizen appliqué au mariage</h2>
+<p>Le Kaizen consiste à rechercher une amélioration continue par de petits changements réalistes. Dans le couple, il ne s'agit pas de « tout réparer » en une seule conversation, mais d'observer un cycle qui fait souffrir, de le comprendre, de tester une réponse plus saine, puis d'ajuster.</p>
+<div class="quote"><strong>Cycle :</strong> Observer → Comprendre → Choisir une petite correction → Tester → Évaluer → Ajuster.</div>
+</div>
+
+<div class="card span-6"><h2>Les règles</h2>
+<p><strong>1. Une blessure à la fois.</strong> Ne pas transformer une conversation en inventaire de dix années de fautes.</p>
+<p><strong>2. Les faits avant les jugements.</strong> Décrire ce qui s'est passé avant d'interpréter l'intention de l'autre.</p>
+<p><strong>3. Comprendre n'est pas approuver.</strong> On peut reconnaître une émotion sans valider toutes les conclusions.</p>
+<p><strong>4. Chacun travaille sur sa part.</strong> L'outil n'est pas un dossier à charge contre son conjoint.</p>
+<p><strong>5. Une réparation doit devenir concrète.</strong> Une explication éclaire ; un comportement nouveau reconstruit.</p>
+</div>
+
+<div class="card span-6"><h2>Le parcours annuel</h2>
+<table><tbody>
+<tr><th>Semaines 1–13</th><td><strong>Sécuriser</strong><br>Faire diminuer l'escalade et créer un cadre de dialogue.</td></tr>
+<tr><th>Semaines 14–26</th><td><strong>Comprendre</strong><br>Identifier blessures, émotions, besoins et cycles répétitifs.</td></tr>
+<tr><th>Semaines 27–39</th><td><strong>Réparer</strong><br>Assumer sa part, demander pardon et modifier les comportements.</td></tr>
+<tr><th>Semaines 40–52</th><td><strong>Reconstruire</strong><br>Retrouver proximité, gratitude, projets, confiance et habitudes durables.</td></tr>
+</tbody></table>
+</div>
+
+<div class="card span-12"><h2>Pourquoi prendre un an ?</h2>
+<p>Le fait que les blessures soient anciennes ne permet pas de prévoir combien de temps leur guérison prendra. Ce parcours d'un an fournit simplement un cadre suffisamment long pour travailler avec répétition et régularité, plutôt que de chercher un résultat immédiat.</p>
+<p>Chaque semaine comporte un <strong>travail relationnel</strong> et un <strong>exercice spirituel</strong>. Chaque mois comporte un bilan. Toutes les treize semaines, vous faites une révision plus profonde de la phase terminée.</p>
+</div>
+
+<div class="card span-12"><h2>Exemple</h2>
+<table><tbody>
+<tr><th>Observation</th><td>Après une parole blessante, l'un se retire et l'autre insiste pour continuer.</td></tr>
+<tr><th>Cycle</th><td>Blessure → retrait → poursuite → sentiment d'étouffement → retrait plus fort → sentiment d'abandon → escalade.</td></tr>
+<tr><th>Petit changement</th><td>« Je suis trop bouleversé pour continuer correctement. J'ai besoin d'une pause. Je ne t'abandonne pas. Nous reprendrons cette discussion. »</td></tr>
+<tr><th>Évaluation</th><td>La pause réduit-elle l'escalade ? La discussion reprend-elle vraiment ?</td></tr>
+<tr><th>Ajustement</th><td>Modifier ensemble la façon d'annoncer la pause et de revenir au dialogue.</td></tr>
+</tbody></table>
+</div>
+</div>
+</section>
+
+<section class="panel" id="dashboard">
+<div class="grid">
+<div class="card span-8"><h2>Progression annuelle</h2><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div><p><span class="metric" id="progressText">0%</span> <span class="muted">du parcours annuel complété</span></p></div>
+<div class="card span-4"><h2>Prochaine étape</h2><div class="metric" id="todayLabel">Semaine 1</div><p class="muted" id="todayGoal">Créer un cadre de sécurité.</p><button class="primary" onclick="openCurrent()">Voir la semaine</button></div>
+<div class="card span-6"><h3>Minimum relationnel quotidien</h3>
+<div class="checkline"><input type="checkbox" data-daily="talk"><span>10 minutes de conversation sans téléphone.</span></div>
+<div class="checkline"><input type="checkbox" data-daily="gratitude"><span>Une parole positive sincère.</span></div>
+<div class="checkline"><input type="checkbox" data-daily="connection"><span>Un geste de connexion accepté par l'autre.</span></div>
+</div>
+<div class="card span-6"><h3>Minimum spirituel quotidien</h3>
+<div class="checkline"><input type="checkbox" data-daily="prayer"><span>Une courte prière ensemble.</span></div>
+<div class="checkline"><input type="checkbox" data-daily="scripture"><span>Lire quelques versets ou méditer une parole biblique.</span></div>
+<div class="checkline"><input type="checkbox" data-daily="blessing"><span>Remercier Dieu pour une qualité ou un geste de l'autre.</span></div>
+</div>
+<div class="card span-12"><h3>Notre objectif Kaizen de cette semaine</h3><textarea id="weeklyGoal" placeholder="Une seule amélioration concrète et réaliste."></textarea></div>
+</div>
+</section>
+
+<section class="panel" id="year">
+<div class="card"><h2>Parcours Kaizen — 52 semaines</h2><p class="muted">Cochez une semaine seulement après avoir réellement essayé l'exercice. Une semaine difficile peut être répétée avant de continuer.</p><div class="progress-track"><div class="progress-bar" id="yearProgressBar"></div></div><p><span class="metric" id="yearProgressText">0%</span> <span class="muted">des semaines complétées</span></p></div>
+<div id="yearWeeks"></div>
+</section>
+
+<section class="panel" id="spiritual">
+<div class="grid">
+<div class="card span-12"><span class="badge">Dimension spirituelle</span><h2 style="margin-top:12px">Exercice spirituel quotidien — 10 à 15 minutes</h2>
+<p>La prière n'est pas utilisée pour éviter une conversation difficile ou pour imposer à l'autre de pardonner. Elle sert à se placer devant Dieu, examiner son propre cœur, demander la grâce de changer et soutenir le travail relationnel concret.</p></div>
+<div class="card span-6"><h3>Rituel en 6 étapes</h3>
+<p><strong>1. Présence de Dieu — 1 min.</strong><br><span class="muted">Silence, signe de croix, invocation.</span></p>
+<p><strong>2. Parole de Dieu — 2 min.</strong><br><span class="muted">Un court passage sur l'amour, la patience, la vérité ou le pardon.</span></p>
+<p><strong>3. Examen du cœur — 3 min.</strong><br><span class="muted">« Seigneur, montre-moi où j'ai aimé et où j'ai blessé aujourd'hui. »</span></p>
+<p><strong>4. Gratitude — 2 min.</strong><br><span class="muted">Chacun remercie Dieu pour une chose précise chez l'autre.</span></p>
+<p><strong>5. Grâce à demander — 2 min.</strong><br><span class="muted">Douceur, écoute, vérité, maîtrise de soi, courage, pardon…</span></p>
+<p><strong>6. Prière commune — 2 min.</strong><br><span class="muted">Notre Père ou une prière spontanée.</span></p>
+</div>
+<div class="card span-6"><h3>Examen spirituel personnel</h3>
+<div class="field"><label>Pour quoi puis-je remercier Dieu aujourd'hui dans notre mariage ?</label><textarea id="sp_gratitude"></textarea></div>
+<div class="field"><label>Où ai-je manqué de charité, de vérité ou de douceur ?</label><textarea id="sp_failure"></textarea></div>
+<div class="field"><label>Quelle blessure s'est réveillée en moi ?</label><textarea id="sp_wound"></textarea></div>
+<div class="field"><label>Quelle grâce est-ce que je demande pour demain ?</label><textarea id="sp_grace"></textarea></div>
+</div>
+<div class="card span-12"><h3>Parcours biblique</h3>
+<table><thead><tr><th>Période</th><th>Passages</th><th>Intention</th></tr></thead><tbody>
+<tr><td>Mois 1–3</td><td>1 Co 13,4-7 ; Jc 1,19-20 ; Ep 4,26-32</td><td>Patience, écoute, colère, pardon.</td></tr>
+<tr><td>Mois 4–6</td><td>Col 3,12-15 ; Mt 7,3-5 ; Ps 139,23-24</td><td>Humilité, examen de soi, compassion.</td></tr>
+<tr><td>Mois 7–9</td><td>Jn 15,9-12 ; Ph 2,3-5 ; Rm 12,9-18</td><td>Don de soi, respect, paix.</td></tr>
+<tr><td>Mois 10–12</td><td>Qo 4,9-12 ; Mc 10,6-9 ; Ps 103,1-5</td><td>Alliance, fidélité, mémoire du bien.</td></tr>
+</tbody></table></div>
+<div class="card span-12"><h3>Prière de réconciliation</h3><div class="quote">Seigneur, apprends-nous à voir la vérité sans nous détruire, à reconnaître nos torts sans nous humilier l'un l'autre, à pardonner sans nier les blessures, et à reconstruire avec patience. Donne-nous la grâce de parler avec vérité, d'écouter avec douceur et de protéger notre alliance. Amen.</div></div>
+</div>
+</section>
+
+<section class="panel" id="wounds"><div class="card"><h2>Cartographie des blessures</h2><p class="muted">Travaillez au maximum trois blessures à la fois.</p><div id="woundForms"></div></div></section>
+
+<section class="panel" id="weekly"><div class="card"><h2>Réunion Kaizen hebdomadaire — 30 à 45 minutes</h2><p class="quote">On évalue le fonctionnement de la relation, pas la valeur de la personne.</p>
+<div class="field"><label>Semaine à renseigner</label><select id="weeklySelect"></select></div><div id="weeklyForm"></div></div></section>
+
+<section class="panel" id="monthly"><div class="card"><h2>Bilan mensuel — 45 à 60 minutes</h2><p class="muted">Choisissez le mois puis faites le bilan ensemble.</p>
+<div class="field"><label>Mois</label><select id="monthlySelect"></select></div><div id="monthlyForm"></div></div></section>
+
+<section class="panel" id="metrics">
+<div class="grid"><div class="card span-12"><h2>Indicateurs de la relation</h2><p class="muted">De 0 à 10. Le but est d'observer une tendance, pas de noter votre conjoint.</p>
+<div class="slider-row"><label>Sécurité émotionnelle</label><input type="range" min="0" max="10" id="m_security"><output>5</output></div>
+<div class="slider-row"><label>Qualité du dialogue</label><input type="range" min="0" max="10" id="m_dialogue"><output>5</output></div>
+<div class="slider-row"><label>Affection / proximité</label><input type="range" min="0" max="10" id="m_affection"><output>5</output></div>
+<div class="slider-row"><label>Capacité à réparer</label><input type="range" min="0" max="10" id="m_repair"><output>5</output></div>
+<div class="slider-row"><label>Confiance</label><input type="range" min="0" max="10" id="m_trust"><output>5</output></div>
+<div class="metric-summary"><div class="gauge" id="metricGauge"><span id="metricGaugeVal">5.0</span></div><div><div class="lbl">Climat relationnel — moyenne</div><div class="sub">Observez surtout l'évolution d'une semaine à l'autre, pas le chiffre isolé.</div></div></div>
+</div>
+<div class="card span-12"><h3>Journal daté</h3>
+<p class="muted small">Chaque entrée est horodatée et conservée : un vrai fil chronologique pour suivre l'évolution semaine après semaine. (Astuce : Ctrl+Entrée pour ajouter.)</p>
+<div class="journal-compose">
+<textarea id="journalInput" placeholder="Écrire une note pour aujourd'hui…"></textarea>
+<div class="row"><button class="primary" onclick="addJournalEntry()">Ajouter au journal</button></div>
+</div>
+<div id="journalList" style="margin-top:14px"></div>
+</div>
+<div class="card span-12"><h3>Mes données &amp; sauvegarde</h3>
+<p class="muted small">Vos réponses et votre progression sont enregistrées uniquement dans ce navigateur, sur cet appareil. Exportez régulièrement une sauvegarde pour ne rien perdre — puis réimportez-la sur un autre appareil ou après un nettoyage du navigateur.</p>
+<div class="data-actions">
+<button class="primary" onclick="exportData()">Exporter une sauvegarde</button>
+<button class="secondary" onclick="document.getElementById('importFile').click()">Importer une sauvegarde</button>
+<button class="secondary" onclick="window.print()">Imprimer / PDF</button>
+<button class="danger" onclick="resetAll()">Réinitialiser</button>
+</div>
+<input type="file" id="importFile" accept="application/json,.json" hidden onchange="importData(this)">
+<div id="backupMsg" class="small" style="margin-top:10px;color:var(--olive);font-weight:700"></div>
+</div>
+</div>
+</section>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigation mobile">
+  <button data-mobile-tab="home" class="active"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10.2V20h12v-9.8"/></svg></span>Accueil</button>
+  <button data-mobile-tab="year"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h6a4 4 0 0 1 0 8H10a4 4 0 0 0 0 8"/></svg></span>Parcours</button>
+  <button data-mobile-tab="spiritual"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.6 2.3 3 4 3 6.4A3 3 0 0 1 12 12a3 3 0 0 1-3-2.6C9 7 10.4 5.3 12 3z"/><path d="M6.5 21c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/></svg></span>Prière</button>
+  <button data-mobile-tab="wounds"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-6.5-4.3-8.6-8.3C1.9 8.6 3.3 5.5 6.3 5.5c1.9 0 3.1 1.1 3.7 2.1.6-1 1.8-2.1 3.7-2.1 3 0 4.4 3.1 2.9 6.2C18.5 15.7 12 20 12 20z"/></svg></span>Blessures</button>
+  <button data-mobile-tab="metrics"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M7.5 16l3.2-3.6 2.6 2.2L18 9"/></svg></span>Suivi</button>
+</nav>
+
+<footer>Parcours annuel — données enregistrées uniquement dans le navigateur de cet appareil.</footer>
+
+<script>
+const phases=[
+{name:"Phase 1 — Sécuriser",range:"Semaines 1 à 13",themes:[
+["Créer un cadre de sécurité","Décider ensemble des comportements interdits pendant les conflits.","Priez pour recevoir douceur et maîtrise de soi."],
+["Apprendre à faire une pause","Créer une phrase commune pour interrompre un conflit sans abandonner la relation.","Méditer Jc 1,19 et demander la grâce d'écouter."],
+["Revenir au dialogue","Fixer une règle réaliste de reprise après une pause.","Demander à Dieu le courage de revenir vers l'autre."],
+["Identifier les déclencheurs","Repérer mots, gestes ou situations qui font rapidement monter la tension.","Trois minutes de silence : « Seigneur, qu'est-ce qui se joue en moi ? »"],
+["Parler sans accuser","Utiliser : fait → émotion → besoin → demande.","Méditer Ep 4,29 et choisir une parole qui construit."],
+["Écouter sans se défendre","Écouter cinq minutes sans corriger ni préparer sa réponse.","« Seigneur, apprends-moi à écouter avant de répondre. »"],
+["Reconnaître la surcharge émotionnelle","Identifier les signes physiques qui annoncent l'escalade.","Respirer, se calmer et prier avant de reprendre."],
+["Reconnaître les efforts","Nommer un effort concret de l'autre chaque jour.","Rendre grâce pour une qualité précise du conjoint."],
+["Poser des limites saines","Clarifier ce qui est inacceptable et comment le signaler.","Demander la grâce de poser une limite sans mépris."],
+["Réduire les mots destructeurs","Supprimer une expression blessante récurrente.","Méditer Pr 15,1."],
+["Créer un rituel d'apaisement","Choisir un geste simple qui aide à revenir au calme.","Terminer la journée par une courte prière de paix."],
+["Sécurité et tendresse","Réintroduire un geste d'affection librement accepté.","Remercier Dieu pour un souvenir heureux du couple."],
+["Bilan du trimestre","Évaluer ce qui a diminué l'escalade et ce qui reste difficile.","Prière d'action de grâce et intention pour la phase suivante."]
+]},
+{name:"Phase 2 — Comprendre",range:"Semaines 14 à 26",themes:[
+["Choisir une blessure ancienne","Travailler une seule blessure à la fois.","Prier Ps 139,23-24."],
+["Nommer l'émotion profonde","Identifier peur, rejet, solitude, honte, colère ou tristesse.","Présenter cette émotion à Dieu sans la juger."],
+["Séparer fait et interprétation","Écrire ce qui s'est passé et ce que chacun en a conclu.","Demander la lumière pour distinguer fait et interprétation."],
+["Identifier le besoin","Formuler ce dont chacun aurait besoin aujourd'hui.","Demander ce besoin sans l'imposer."],
+["Comprendre l'histoire de l'autre","Écouter ce que l'événement a réveillé chez le conjoint.","Prier pour regarder l'autre avec compassion."],
+["Cartographier le cycle négatif","Décrire déclencheur → réaction A → réaction B → escalade.","Nommer le cycle comme l'ennemi commun."],
+["Repérer les blessures répétées","Identifier ce qui revient sous différentes formes.","Demander à Dieu de révéler ce qui doit être travaillé."],
+["Parler de confiance","Identifier ce qui augmente ou diminue la confiance.","Lire Col 3,12-15."],
+["Parler de respect","Définir concrètement ce que signifie respecter l'autre.","Examen de conscience sur mépris, ironie et dureté."],
+["Parler de proximité","Exprimer ce qui rapproche et ce qui éloigne émotionnellement.","Rendre grâce pour un moment de proximité."],
+["Parler des attentes","Identifier les attentes implicites qui deviennent des reproches.","Demander la grâce de formuler clairement les attentes."],
+["Reconnaître ce qui nécessite de l'aide","Distinguer ce qui peut être travaillé à deux et ce qui nécessite un tiers qualifié.","Prier pour l'humilité de demander de l'aide."],
+["Bilan du trimestre","Choisir les deux blessures principales pour la suite.","Confier ces blessures à Dieu ensemble."]
+]},
+{name:"Phase 3 — Réparer",range:"Semaines 27 à 39",themes:[
+["Assumer sa part","Nommer sa responsabilité sans ajouter « mais toi aussi ».","Faire un examen de conscience personnel."],
+["Apprendre à demander pardon","Reconnaître le fait, son impact et le regret.","Méditer Mt 5,23-24."],
+["Recevoir une excuse","Écouter l'excuse sans exiger une guérison instantanée.","Demander la grâce de ne pas utiliser la faute comme arme."],
+["Demander une réparation","Formuler une demande précise, réaliste et observable.","Prier pour une demande juste et non punitive."],
+["Tester un nouveau comportement","Changer une seule réaction habituelle pendant une semaine.","Offrir cet effort comme acte de charité."],
+["Réparer après une dispute","Créer un rituel : reconnaître, reformuler, réparer.","Prier ensemble avant de clore le conflit."],
+["Réparer la confiance","Choisir un engagement concret et vérifiable.","Demander la grâce de la fidélité dans les petites choses."],
+["Réparer la parole","Remplacer critiques et sarcasmes par des formulations respectueuses.","Méditer Ep 4,31-32."],
+["Réparer la proximité","Créer chaque jour un moment de présence réelle.","Rendre grâce pour la présence de l'autre."],
+["Réparer les habitudes","Identifier une habitude relationnelle nocive et la remplacer.","Demander persévérance et constance."],
+["Faire mémoire du bien","Relire les moments où le couple a traversé une épreuve.","Prier Ps 103,1-5."],
+["Demander de l'aide si nécessaire","Décider si un thérapeute ou accompagnateur qualifié est utile.","Prier pour recevoir l'aide appropriée."],
+["Bilan du trimestre","Mesurer les réparations réellement observables.","Prière de gratitude pour tout progrès réel."]
+]},
+{name:"Phase 4 — Reconstruire",range:"Semaines 40 à 52",themes:[
+["Retrouver l'amitié","Faire une activité simple appréciée ensemble.","Rendre grâce pour l'amitié conjugale."],
+["Créer des rituels","Installer un rituel quotidien ou hebdomadaire stable.","Confier ce rituel à Dieu."],
+["Revenir à la gratitude","Dire chaque jour une qualité ou un geste apprécié.","Tenir un mini journal de gratitude."],
+["Redécouvrir l'autre","Poser de nouvelles questions sur rêves, peurs et projets.","Prier pour garder un regard neuf."],
+["Protéger le couple","Clarifier les frontières avec travail, famille, amis, téléphone ou réseaux.","Demander sagesse et équilibre."],
+["Construire un projet commun","Choisir un projet concret à six ou douze mois.","Confier ce projet à Dieu."],
+["Parler des valeurs","Identifier les valeurs que vous voulez transmettre comme couple.","Lire Qo 4,9-12."],
+["Renforcer l'affection","Créer davantage de gestes de tendresse consentis.","Prier pour une affection vraie et respectueuse."],
+["Célébrer les progrès","Nommer les changements visibles depuis le début.","Faire une action de grâce ensemble."],
+["Préparer les rechutes","Écrire quoi faire si un ancien cycle revient.","Demander la grâce de recommencer sans découragement."],
+["Choisir les habitudes durables","Sélectionner trois pratiques à conserver l'année suivante.","Prier pour la fidélité dans le temps."],
+["Renouveler l'engagement","Exprimer ce que chacun veut continuer à construire.","Lire lentement 1 Co 13,4-7."],
+["Bilan annuel et nouveau départ","Comparer le début et la fin, célébrer et identifier les blessures encore actives.","Prière d'action de grâce, de pardon et d'offrande du mariage."]
+]}];
+
+const weeks=[];phases.forEach(p=>p.themes.forEach(t=>weeks.push({w:weeks.length+1,phase:p.name,title:t[0],action:t[1],spiritual:t[2]})));
+const weeklyQs=["Qu'est-ce qui m'a fait du bien cette semaine ?","Qu'est-ce qui m'a blessé cette semaine ?","Qu'as-tu fait que j'ai apprécié ?","Quel cycle négatif avons-nous observé ?","Qu'avons-nous mieux géré que la fois précédente ?","Quel exercice spirituel nous a aidés ?","Quelle petite amélioration testons-nous la semaine prochaine ?"];
+const monthlyQs=["Quelle a été notre plus belle amélioration ce mois-ci ?","Quelle blessure s'est le plus réveillée ?","Quel cycle négatif reste actif ?","Qu'avons-nous mieux géré qu'avant ?","Quel geste spirituel nous a fait du bien ?","Qu'est-ce qui demande encore réparation ?","Avons-nous besoin d'une aide extérieure pour un point précis ?","Quelle sera notre priorité Kaizen le mois prochain ?"];
+
+const key="kaizenMarriageYear";let state=JSON.parse(localStorage.getItem(key)||"{}");
+state.done=state.done||{};state.notes=state.notes||{};state.wounds=state.wounds||[{},{},{}];state.weekly=state.weekly||Array.from({length:52},()=>({}));state.monthly=state.monthly||Array.from({length:12},()=>({}));state.metrics=state.metrics||{};state.daily=state.daily||{};state.spiritual=state.spiritual||{};state.journalEntries=state.journalEntries||[];state.notesHistory=state.notesHistory||{};
+if(state.journal&&!state.journalEntries.length){state.journalEntries=[{id:uid(),ts:Date.now(),text:state.journal}];state.journal="";}
+const esc=v=>String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+function save(){
+  localStorage.setItem(key,JSON.stringify(state));
+  updateDashboard();
+}
+function switchTab(id){
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+  document.querySelectorAll("[data-mobile-tab]").forEach(b=>b.classList.toggle("active",b.dataset.mobileTab===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".tab-btn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+
+function renderWeeks(){const host=document.getElementById("yearWeeks");phases.forEach((p,pi)=>{const h=document.createElement("div");h.className="week-title";h.dataset.phase=pi;h.innerHTML=`<h2>${p.name}</h2><span class="badge">${p.range}</span>`;host.appendChild(h);const g=document.createElement("div");g.className="week-grid";g.dataset.phase=pi;weeks.filter(x=>x.phase===p.name).forEach(item=>{const c=document.createElement("div");c.className="week-card"+(state.done[item.w]?" done":"");c.id="week-"+item.w;c.innerHTML=`<div class="day-head"><span class="badge">Semaine ${item.w}</span><input type="checkbox" ${state.done[item.w]?"checked":""} onchange="toggleWeek(${item.w},this.checked)"></div><h3>${item.title}</h3><div><strong>Exercice relationnel</strong><p>${item.action}</p></div><div><strong>Exercice spirituel</strong><div class="quote">${item.spiritual}</div></div><div class="field"><label>Ce que nous observons</label><textarea oninput="state.notes[${item.w}]=this.value;save()" onblur="commitWeekNote(${item.w},this.value)">${esc(state.notes[item.w])}</textarea></div><div class="note-hist" data-w="${item.w}"></div>`;g.appendChild(c)});host.appendChild(g)})}
+function toggleWeek(w,v){state.done[w]=v;document.getElementById("week-"+w).classList.toggle("done",v);save()}
+function updateDashboard(){const complete=Object.values(state.done).filter(Boolean).length,pct=Math.round(complete/52*100);["progressBar","yearProgressBar"].forEach(id=>document.getElementById(id).style.width=pct+"%");["progressText","yearProgressText"].forEach(id=>document.getElementById(id).textContent=pct+"%");const next=weeks.find(x=>!state.done[x.w])||weeks[51];document.getElementById("todayLabel").textContent="Semaine "+next.w;document.getElementById("todayGoal").textContent=next.title}
+function openCurrent(){const next=weeks.find(x=>!state.done[x.w])||weeks[51];switchTab("year");setTimeout(()=>document.getElementById("week-"+next.w).scrollIntoView({behavior:"smooth",block:"center"}),150)}
+
+function renderWounds(){const host=document.getElementById("woundForms");for(let i=0;i<3;i++){const w=state.wounds[i]||{};const d=document.createElement("div");d.className="card";d.style.margin="12px 0";d.innerHTML=`<h3>Blessure ${i+1}</h3>${wf(i,"event","Fait précis",w.event)}${wf(i,"emotion","Émotion ressentie",w.emotion)}${wf(i,"meaning","Interprétation que j'en ai faite",w.meaning)}${wf(i,"need","Ce dont j'aurais besoin aujourd'hui",w.need)}${wf(i,"action","Petite correction concrète à tester",w.action)}`;host.appendChild(d)}}
+function wf(i,k,l,v){return `<div class="field"><label>${l}</label><textarea oninput="state.wounds[${i}]['${k}']=this.value;save()">${esc(v)}</textarea></div>`}
+
+function renderWeekly(){const s=document.getElementById("weeklySelect");weeks.forEach(x=>s.insertAdjacentHTML("beforeend",`<option value="${x.w-1}">Semaine ${x.w} — ${x.title}</option>`));s.addEventListener("change",renderWeeklyForm);renderWeeklyForm()}
+function renderWeeklyForm(){const i=Number(document.getElementById("weeklySelect").value||0),host=document.getElementById("weeklyForm");host.innerHTML=weeklyQs.map((q,j)=>`<div class="field"><label>${q}</label><textarea oninput="state.weekly[${i}]['q${j}']=this.value;save()">${esc((state.weekly[i]||{})["q"+j])}</textarea></div>`).join("")}
+
+function renderMonthly(){const s=document.getElementById("monthlySelect");for(let i=0;i<12;i++)s.insertAdjacentHTML("beforeend",`<option value="${i}">Mois ${i+1}</option>`);s.addEventListener("change",renderMonthlyForm);renderMonthlyForm()}
+function renderMonthlyForm(){const i=Number(document.getElementById("monthlySelect").value||0),host=document.getElementById("monthlyForm");host.innerHTML=monthlyQs.map((q,j)=>`<div class="field"><label>${q}</label><textarea oninput="state.monthly[${i}]['q${j}']=this.value;save()">${esc((state.monthly[i]||{})["q"+j])}</textarea></div>`).join("")}
+
+function setup(){document.getElementById("weeklyGoal").value=state.weeklyGoal||"";document.getElementById("weeklyGoal").addEventListener("input",e=>{state.weeklyGoal=e.target.value;save()});document.querySelectorAll("[data-daily]").forEach(c=>{c.checked=!!state.daily[c.dataset.daily];c.addEventListener("change",e=>{state.daily[c.dataset.daily]=e.target.checked;save()})});["gratitude","failure","wound","grace"].forEach(k=>{const e=document.getElementById("sp_"+k);e.value=state.spiritual[k]||"";e.addEventListener("input",x=>{state.spiritual[k]=x.target.value;save()})});["security","dialogue","affection","repair","trust"].forEach(k=>{const e=document.getElementById("m_"+k);e.value=state.metrics[k]??5;e.nextElementSibling.textContent=e.value;e.addEventListener("input",x=>{state.metrics[k]=Number(x.target.value);x.target.nextElementSibling.textContent=x.target.value;save()})})}
+function resetAll(){if(confirm("Effacer toutes les réponses et toute la progression ?")){localStorage.removeItem(key);location.reload()}}
+function backupMsg(txt,ok){const el=document.getElementById("backupMsg");if(!el)return;el.style.color=ok===false?"var(--danger)":"var(--olive)";el.textContent=txt;clearTimeout(backupMsg._t);backupMsg._t=setTimeout(()=>{el.textContent=""},6000)}
+function exportData(){
+  try{
+    const payload={app:"kaizen-mariage",version:1,exportedAt:new Date().toISOString(),data:JSON.parse(localStorage.getItem(key)||JSON.stringify(state))};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob),a=document.createElement("a"),d=new Date(),p=n=>String(n).padStart(2,"0");
+    a.href=url;a.download=`kaizen-mariage-sauvegarde-${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}.json`;
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+    backupMsg("Sauvegarde exportée : conservez ce fichier en lieu sûr.");
+  }catch(e){backupMsg("Export impossible : "+e.message,false)}
+}
+function importData(input){
+  const file=input.files&&input.files[0];if(!file){return}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      let obj=JSON.parse(e.target.result);
+      if(obj&&obj.app==="kaizen-mariage"&&obj.data){obj=obj.data}
+      if(!obj||typeof obj!=="object"||Array.isArray(obj))throw new Error("format inattendu");
+      if(!confirm("Remplacer les données actuelles par cette sauvegarde ? Cette action est irréversible.")){input.value="";return}
+      localStorage.setItem(key,JSON.stringify(obj));
+      location.reload();
+    }catch(err){backupMsg("Fichier de sauvegarde illisible ("+err.message+").",false)}
+    input.value="";
+  };
+  reader.onerror=()=>{backupMsg("Lecture du fichier impossible.",false);input.value=""};
+  reader.readAsText(file);
+}
+
+/* ---- Historique : journal daté + versions des notes de semaine ---- */
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function fmtDate(ts){try{return new Date(ts).toLocaleString("fr-FR",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(e){return ""}}
+
+let journalEditId=null;
+function renderJournal(){
+  const host=document.getElementById("journalList");if(!host)return;
+  const entries=(state.journalEntries||[]).slice().sort((a,b)=>b.ts-a.ts);
+  if(!entries.length){host.innerHTML='<div class="empty">Aucune entrée pour l\'instant — écrivez votre première note ci-dessus.</div>';return;}
+  host.innerHTML=entries.map(e=>{
+    if(journalEditId===e.id){
+      return `<div class="entry"><div class="entry-head"><span class="entry-date">${fmtDate(e.ts)}</span></div>`
+        +`<textarea id="jedit-${e.id}">${esc(e.text)}</textarea>`
+        +`<div class="row" style="margin-top:8px"><button class="secondary" onclick="cancelJournalEdit()">Annuler</button> <button class="primary" onclick="saveJournalEdit('${e.id}')">Enregistrer</button></div></div>`;
+    }
+    return `<div class="entry"><div class="entry-head"><span class="entry-date">${fmtDate(e.ts)}</span>`
+      +`<span class="entry-actions"><button class="icon-btn" onclick="startJournalEdit('${e.id}')">Modifier</button>`
+      +`<button class="icon-btn del" onclick="deleteJournalEntry('${e.id}')">Supprimer</button></span></div>`
+      +`<div class="entry-text">${esc(e.text)}</div></div>`;
+  }).join("");
+}
+function addJournalEntry(){
+  const ta=document.getElementById("journalInput");if(!ta)return;
+  const t=(ta.value||"").trim();if(!t)return;
+  state.journalEntries=state.journalEntries||[];
+  state.journalEntries.push({id:uid(),ts:Date.now(),text:t});
+  ta.value="";save();renderJournal();
+}
+function startJournalEdit(id){journalEditId=id;renderJournal();const el=document.getElementById("jedit-"+id);if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length);}}
+function cancelJournalEdit(){journalEditId=null;renderJournal();}
+function saveJournalEdit(id){
+  const el=document.getElementById("jedit-"+id);if(!el)return;
+  const t=(el.value||"").trim();
+  if(!t){state.journalEntries=(state.journalEntries||[]).filter(x=>x.id!==id);}
+  else{const e=(state.journalEntries||[]).find(x=>x.id===id);if(e)e.text=t;}
+  journalEditId=null;save();renderJournal();
+}
+function deleteJournalEntry(id){
+  if(!confirm("Supprimer cette entrée du journal ?"))return;
+  state.journalEntries=(state.journalEntries||[]).filter(x=>x.id!==id);
+  save();renderJournal();
+}
+
+const histOpen=new Set();
+function commitWeekNote(w,val){
+  val=(val||"").trim();if(!val)return;
+  state.notesHistory=state.notesHistory||{};
+  const arr=state.notesHistory[w]=state.notesHistory[w]||[];
+  const last=arr[arr.length-1];
+  if(last&&last.text===val)return;
+  arr.push({ts:Date.now(),text:val});
+  save();renderNoteHist(w);
+}
+function toggleHist(w){const k=String(w);if(histOpen.has(k))histOpen.delete(k);else histOpen.add(k);renderNoteHist(w);}
+function renderNoteHist(w){
+  const host=document.querySelector('.note-hist[data-w="'+w+'"]');if(!host)return;
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];const n=arr.length;
+  if(!n){host.innerHTML="";return;}
+  const open=histOpen.has(String(w));
+  let html=`<button type="button" class="hist-toggle" onclick="toggleHist(${w})">${open?"▾":"▸"} Historique des versions (${n})</button>`;
+  if(open){
+    html+='<div class="hist-list">'+arr.map((v,i)=>({v:v,i:i})).reverse().map(o=>
+      `<div class="hist-item"><div class="hist-date">${fmtDate(o.v.ts)}</div><div class="hist-text">${esc(o.v.text)}</div>`
+      +`<div class="hist-actions"><button class="icon-btn" onclick="restoreWeekNote(${w},${o.i})">Restaurer</button>`
+      +`<button class="icon-btn del" onclick="deleteWeekVersion(${w},${o.i})">Supprimer</button></div></div>`
+    ).join("")+"</div>";
+  }
+  host.innerHTML=html;
+}
+function restoreWeekNote(w,idx){
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];const v=arr[idx];if(!v)return;
+  state.notes[w]=v.text;
+  const card=document.getElementById("week-"+w);
+  if(card){const ta=card.querySelector("textarea");if(ta)ta.value=v.text;}
+  save();
+}
+function deleteWeekVersion(w,idx){
+  if(!confirm("Supprimer cette version ?"))return;
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];arr.splice(idx,1);
+  save();renderNoteHist(w);
+}
+
+renderWeeks();renderWounds();renderWeekly();renderMonthly();setup();renderJournal();weeks.forEach(x=>renderNoteHist(x.w));updateDashboard();
+(function(){const ji=document.getElementById("journalInput");if(ji)ji.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();addJournalEntry();}});})();
+document.querySelectorAll("[data-mobile-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.mobileTab)));
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}
+</script>
+<script>
+(function(){
+  var root=document.documentElement, tkey="kaizenTheme";
+  var meta=document.querySelector('meta[name="theme-color"]');
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 7 7 0 1 0 20 14.5z"/></svg>';
+  function apply(t){
+    root.setAttribute("data-theme",t);
+    if(meta) meta.setAttribute("content", t==="dark" ? "#181310" : "#5a3a28");
+    var b=document.getElementById("themeToggle"); if(b) b.innerHTML = (t==="dark"? SUN : MOON);
+  }
+  var saved=null; try{saved=localStorage.getItem(tkey);}catch(e){}
+  var t = saved || ((window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light");
+  apply(t);
+  var tb=document.getElementById("themeToggle");
+  if(tb) tb.addEventListener("click",function(){
+    t = (root.getAttribute("data-theme")==="dark") ? "light" : "dark";
+    try{localStorage.setItem(tkey,t);}catch(e){}
+    apply(t);
+  });
+
+  function fillRange(el){ var mn=+el.min||0, mx=+el.max||100, v=+el.value; el.style.setProperty("--p", ((v-mn)/(mx-mn)*100)+"%"); }
+  var mIds=["m_security","m_dialogue","m_affection","m_repair","m_trust"];
+  function updateAvg(){
+    var g=document.getElementById("metricGauge"); if(!g) return;
+    var s=0,n=0; mIds.forEach(function(id){var e=document.getElementById(id); if(e){s+=(+e.value);n++;}});
+    var avg = n? s/n : 0, pct=Math.round(avg/10*100);
+    g.style.setProperty("--g", pct+"%");
+    var lbl=document.getElementById("metricGaugeVal"); if(lbl) lbl.textContent=avg.toFixed(1);
+  }
+  document.querySelectorAll('input[type=range]').forEach(function(r){
+    fillRange(r);
+    r.addEventListener("input", function(){ fillRange(r); updateAvg(); });
+  });
+  updateAvg();
+})();
+</script>
+</body>
+</html>
