@@ -12,198 +12,803 @@
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>Kaizen du Mariage — Parcours d'un an</title>
 <style>
-:root{--bg:#f6f3ee;--card:#fff;--ink:#2d2a27;--muted:#746d66;--line:#ded7cf;--accent:#7b5037;--accent2:#c99b73;--soft:#efe4d8;--good:#4c7a5a;--danger:#9a4949;--shadow:0 12px 30px rgba(65,49,35,.08)}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(180deg,#f8f5f0,#f3eee8);color:var(--ink)}
-header{padding:30px 18px 20px;background:linear-gradient(135deg,#493225,#76503a);color:#fff}.wrap{max-width:1180px;margin:auto}
-.hero{display:grid;grid-template-columns:1.4fr .8fr;gap:18px;align-items:end}h1{font-size:clamp(30px,5vw,48px);margin:0;line-height:1.05}.subtitle{color:#f1dfd0;max-width:760px}
-.hero-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12)}
-main{padding:20px 14px 60px}.tabs{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:10;background:rgba(246,243,238,.95);padding:10px 0;margin-bottom:16px}
-.tab-btn{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}h2,h3{margin-top:0}.muted{color:var(--muted)}.small{font-size:13px}
-.badge{display:inline-flex;padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--accent);font-size:12px;font-weight:800}
-.progress-track{height:14px;background:#eadfd6;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:.3s}.metric{font-size:32px;font-weight:800}
-button.primary,button.secondary,button.danger{border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}button.primary{background:var(--accent);color:#fff}button.secondary{background:#eee7e0;color:var(--ink)}button.danger{background:#f4dede;color:var(--danger)}
-textarea,input[type=text],select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:90px;resize:vertical}.field{display:grid;gap:7px;margin-bottom:12px}.field label{font-weight:700;font-size:14px}
-.quote{border-left:4px solid var(--accent2);padding:12px 14px;background:#fbf7f3;border-radius:10px}.notice{background:#fff7e7;border:1px solid #ead3a7;color:#6f5523;border-radius:14px;padding:13px 14px;margin-bottom:14px}
-.week-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 10px}.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.week-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;display:flex;flex-direction:column;gap:10px}.week-card.done{outline:2px solid rgba(76,122,90,.35);background:#f8fcf8}
-.day-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.checkline{display:flex;gap:9px;align-items:flex-start}.checkline input{margin-top:4px;transform:scale(1.2)}
-table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#faf6f1}
-.slider-row{display:grid;grid-template-columns:180px 1fr 48px;gap:10px;align-items:center;margin:10px 0}input[type=range]{width:100%}
-footer{padding:24px;text-align:center;color:var(--muted);font-size:13px}
-@media(max-width:780px){.hero{grid-template-columns:1fr}.span-4,.span-6,.span-8,.span-12{grid-column:span 12}.slider-row{grid-template-columns:1fr}}
-@media print{.tabs,button,.hero-card{display:none!important}.panel{display:block!important}.card,.week-card{box-shadow:none;break-inside:avoid}}
-
-/* Mobile application shell */
-.mobile-home{min-height:calc(100vh - 160px);display:flex;align-items:stretch}
-.welcome-card{position:relative;overflow:hidden;background:linear-gradient(160deg,#4b3024 0%,#78513a 60%,#a77959 100%);color:#fff;border:0;min-height:520px;padding:26px}
-.welcome-card:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-90px;top:-70px;background:rgba(255,255,255,.08)}
-.welcome-inner{position:relative;z-index:1;display:flex;flex-direction:column;min-height:465px}
-.welcome-mark{width:68px;height:68px;border-radius:22px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:34px;border:1px solid rgba(255,255,255,.22);margin-bottom:28px}
-.verse{font-family:Georgia,serif;font-size:clamp(25px,6vw,39px);line-height:1.25;margin:10px 0 14px;max-width:850px}
-.verse-ref{font-weight:800;color:#f5ddca}
-.encouragement{margin-top:28px;padding:17px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);line-height:1.6}
-.welcome-actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
-.welcome-actions button{background:#fff;color:#543627;border:0;border-radius:14px;padding:12px 17px;font-weight:800}
-.sync-pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;background:#eee7e0;color:#5c5149;font-size:12px;font-weight:800}
-.sync-dot{width:8px;height:8px;border-radius:50%;background:#a56a2a}.sync-pill.online .sync-dot{background:#4c7a5a}
-.bottom-nav{display:none}
-@media(max-width:780px){
-  body{padding-bottom:78px}
-  header{padding:calc(18px + env(safe-area-inset-top)) 16px 14px}
-  header .hero-card{display:none}
-  header h1{font-size:28px}
-  header .subtitle{font-size:13px;margin-bottom:0}
-  main{padding:10px 10px 90px}
-  .tabs{display:none}
-  .card{border-radius:18px;padding:15px}
-  .welcome-card{min-height:calc(100vh - 205px);border-radius:22px;padding:22px}
-  .welcome-inner{min-height:calc(100vh - 250px)}
-  .verse{font-size:29px}
-  .bottom-nav{
-    display:grid;grid-template-columns:repeat(5,1fr);position:fixed;z-index:50;
-    left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));
-    background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:22px;
-    box-shadow:0 14px 40px rgba(50,38,28,.16);padding:7px;
-    backdrop-filter:blur(14px)
-  }
-  .bottom-nav button{border:0;background:transparent;padding:7px 3px;border-radius:14px;font-size:10px;font-weight:800;color:#746d66}
-  .bottom-nav button .ico{display:block;font-size:20px;margin-bottom:2px}
-  .bottom-nav button.active{background:var(--soft);color:var(--accent)}
-  .week-grid{grid-template-columns:1fr}
-  .week-card{padding:16px}
-  table{font-size:13px;display:block;overflow-x:auto}
-}
-
-/* ===== Mobile V2 ===== */
+/* ============================================================
+   Kaizen du Mariage — habillage « Parchemin & Rubrique »
+   Palette liturgique : cacao · vin (rubrique) · or · olivaie
+   Thème clair + thème sombre « à la bougie »
+   ============================================================ */
 :root{
-  --burgundy:#841b2d;
-  --burgundy-dark:#6d1424;
-  --gold:#c9932f;
-  --cream:#fffaf2;
-  --paper:#fffdf9;
-  --text:#332720;
+  color-scheme:light;
+  --bg:#f2ece0; --bg2:#e9e0d0;
+  --card:#fffdf8; --card-2:#fbf6ec;
+  --ink:#2a2621; --muted:#7c7164; --faint:#a99d8c;
+  --line:#e6ddce; --line-soft:#efe8db;
+  --field-bg:#fffdf8;
+  --soft:#efe6d5;
+  --accent:#6d4a34; --accent-deep:#543726; --accent-ink:#fffdf8;
+  --rubric:#8c2f39;                 /* vin liturgique — marques structurantes */
+  --gold:#a9772f; --gold-soft:#f3e6cb;
+  --olive:#5c7a52;                  /* état « accompli » */
+  --danger:#9a4949; --danger-soft:#f4dede;
+  --hero-a:#41291d; --hero-b:#734c36; --hero-c:#a5744f;
+  --ph0:#6d4a34; --ph1:#8c2f39; --ph2:#a9772f; --ph3:#5c7a52;
+  --notice-bg:#fbf1db; --notice-ink:#6a4f1e; --notice-border:rgba(169,119,47,.4);
+  --shadow:0 1px 2px rgba(60,40,25,.05), 0 14px 34px rgba(70,48,30,.09);
+  --shadow-sm:0 1px 2px rgba(60,40,25,.06), 0 6px 16px rgba(70,48,30,.07);
+  --radius:20px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
-body{background:#fbfaf7}
-.app-header{background:#fffaf5;color:var(--text);padding:0;border-bottom:1px solid #eadfd3;position:sticky;top:0;z-index:30}
-.app-header-inner{min-height:84px;display:flex;align-items:center;gap:13px;padding:12px 18px}
-.brand-mark{width:48px;height:48px;display:grid;place-items:center;border:2px solid #c49a52;border-radius:17px;color:#a87520;font-size:28px}
-.brand-copy{min-width:0;flex:1}.brand-title{font-family:Georgia,serif;font-size:25px;font-weight:700;color:#6d1424;line-height:1.05}.brand-subtitle{font-size:13px;margin-top:4px;color:#57483f}
-.theme-toggle{width:44px;height:44px;border-radius:15px;border:1px solid #d7babe;background:#fff9f7;color:var(--burgundy);font-size:22px}
-.home-shell{display:grid;gap:16px}
-.hero-home{
-  position:relative;
-  overflow:hidden;
-  min-height:520px;
-  border-radius:24px;
-  background:#fff8ea;
-  box-shadow:0 10px 28px rgba(84,54,34,.14);
-  padding:26px 22px 118px;
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#181310; --bg2:#201811;
+  --card:#241d16; --card-2:#2b231a;
+  --ink:#efe5d6; --muted:#a89b88; --faint:#877966;
+  --line:#392f24; --line-soft:#322a20;
+  --field-bg:#2b2219;
+  --soft:#332a20;
+  --accent:#c99b73; --accent-deep:#e0b98f; --accent-ink:#231a11;
+  --rubric:#df9096;
+  --gold:#d6a55c; --gold-soft:#33291a;
+  --olive:#8fb07d;
+  --danger:#e0a3a3; --danger-soft:#3a2323;
+  --hero-a:#33221a; --hero-b:#5a3c2b; --hero-c:#7e553a;
+  --ph0:#c99b73; --ph1:#df9096; --ph2:#d6a55c; --ph3:#8fb07d;
+  --notice-bg:#2f2617; --notice-ink:#ecd6a6; --notice-border:rgba(214,165,92,.3);
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 16px 40px rgba(0,0,0,.55);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4), 0 8px 18px rgba(0,0,0,.4);
 }
-.hero-glow{display:none}
 
-.hero-media{
-  position:absolute;
-  inset:0 0 0 43%;
-  z-index:0;
-  overflow:hidden;
-  background:#e9c9a5;
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--sans);color:var(--ink);line-height:1.55;letter-spacing:.005em;min-height:100vh;
+  background:
+    radial-gradient(1100px 680px at 84% -10%, rgba(180,140,60,.10), transparent 60%),
+    radial-gradient(820px 560px at -6% 6%, rgba(140,47,57,.06), transparent 55%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
 }
-.hero-media img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  object-position:52% center;
-}
-.hero-home::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:linear-gradient(
-    90deg,
-    rgba(255,249,235,1) 0%,
-    rgba(255,249,235,.98) 32%,
-    rgba(255,249,235,.88) 43%,
-    rgba(255,249,235,.35) 54%,
-    rgba(255,249,235,0) 68%
-  );
-}
-.hero-copy,.continue-card{position:relative;z-index:3}
 
-.hero-copy{position:relative;z-index:2;max-width:560px}
-.eyebrow{display:inline-flex;padding:9px 12px;border-radius:11px;background:rgba(255,238,207,.82);color:#8b5d15;font-weight:900;font-size:13px;letter-spacing:.05em}
-.hero-copy blockquote{margin:26px 0 12px;font-family:Georgia,serif;font-size:clamp(32px,6vw,49px);line-height:1.1;color:#2b201a}
-.hero-copy blockquote em{color:#a72b36;font-style:normal}
-.hero-ref{color:#aa7928;font-weight:900;letter-spacing:.12em;font-size:14px}
-.hero-divider{width:60px;height:3px;background:#d4a044;border-radius:2px;margin:23px 0}
-.enc-title{font-weight:900;font-size:14px;color:#452f2b}.enc-text{font-weight:600;font-style:italic;line-height:1.55;max-width:520px;margin-bottom:0}
-.continue-card{position:absolute!important;z-index:4;left:22px;right:22px;bottom:22px;min-height:86px;border:0;border-radius:22px;background:linear-gradient(135deg,#7f1325,#9b1c34);color:white;display:flex;align-items:center;justify-content:center;gap:18px;text-align:left;box-shadow:0 10px 24px rgba(110,20,36,.22)}
-.continue-card strong{display:block;font-size:19px}.continue-card small{display:block;margin-top:4px;font-size:14px;opacity:.92}.continue-icon{width:43px;height:43px;border:3px solid white;border-radius:50%;display:grid;place-items:center;font-size:25px}
-.home-card{background:white;border:1px solid #eee7df;border-radius:22px;padding:18px;box-shadow:0 8px 24px rgba(64,47,37,.06)}
-.home-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px;color:#7a1829;font-size:14px}
-.link-button{border:0;background:transparent;color:#7a1829;font-weight:700;padding:5px;white-space:nowrap}
-.home-progress{height:12px}.progress-row{display:flex;justify-content:space-between;margin-top:10px;font-size:14px}
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quick-tile{min-height:145px;border:0;border-radius:18px;padding:13px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#3c302a}
-.quick-tile strong{font-size:14px}.quick-tile small{font-size:11px;line-height:1.35;color:#5e554e}.quick-ico{font-size:30px}
-.q1{background:#fceeee;color:#8e2130}.q2{background:#eef6ee;color:#277146}.q3{background:#f1ecfb;color:#65409a}.q4{background:#fff3dc;color:#a2690e}
-.disclaimer-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#fff6df;border:1px solid #efd9a8;border-radius:20px;padding:15px 17px;color:#5d4a2b}
-.shield{font-size:26px;color:#b87f16}.disclaimer-more{display:none;margin-top:8px}.disclaimer-card.expanded .disclaimer-more{display:block}
-.backup-actions{display:flex;gap:9px;flex-wrap:wrap}.file-button{display:inline-flex;align-items:center;cursor:pointer;border-radius:12px;padding:10px 14px;font-weight:800;background:#eee7e0}
-body.dark{--bg:#181513;--card:#24201d;--ink:#f2e9e2;--muted:#b8a99d;--line:#433a34;background:#181513;color:#f2e9e2}
-body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title{color:#f0d4d8}.dark .brand-subtitle{color:#c0afa4}.dark .home-card,.dark .card{background:#24201d;border-color:#433a34}.dark .bottom-nav{background:rgba(35,30,27,.97);border-color:#4b4039}.dark .disclaimer-card{background:#332b20;border-color:#5e4c2d;color:#ead8b8}
+/* Typographie */
+h1,h2,h3,.metric,.verse,.quote{font-family:var(--serif)}
+h1{font-size:clamp(30px,5vw,46px);margin:0;line-height:1.06;letter-spacing:-.01em;font-weight:600}
+h2{font-size:clamp(20px,2.4vw,26px);margin:0 0 10px;line-height:1.15;letter-spacing:-.01em;font-weight:600}
+h3{font-size:18px;margin:0 0 8px;font-weight:600}
+p{margin:0 0 10px}p:last-child{margin-bottom:0}
+.muted{color:var(--muted)}.small{font-size:13px}
+.metric{font-size:34px;font-weight:600;color:var(--accent);letter-spacing:-.01em;line-height:1}
+.eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:800}
+
+/* En-tête */
+header{position:relative;padding:34px 18px 26px;color:#fdf6ee;overflow:hidden;
+  background:linear-gradient(135deg,var(--hero-a),var(--hero-b) 62%,var(--hero-c))}
+header:before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(560px 300px at 88% -30%, rgba(255,255,255,.12), transparent 60%)}
+header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,var(--rubric),var(--gold),var(--olive))}
+.wrap{max-width:1180px;margin:auto}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:1.5fr .8fr;gap:20px;align-items:end}
+.hero .eyebrow{display:block;color:#f0cfa0;margin-bottom:10px}
+.subtitle{color:#f1ddca;max-width:760px;margin:10px 0 0;font-size:15px}
+.hero-card{padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);backdrop-filter:blur(4px)}
+.hero-card .small{color:#f0cfa0;text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:11px}
+.hero-card strong{font-family:var(--serif);font-weight:500;font-size:16px;display:block;margin-top:6px;line-height:1.4}
+.header-tools{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;z-index:3;display:flex;gap:8px}
+.hbtn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;
+  backdrop-filter:blur(6px);transition:.16s;font-family:var(--serif);font-size:19px;font-weight:700}
+.hbtn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.hbtn svg{width:20px;height:20px}
+.guide-steps{list-style:none;counter-reset:g;padding:0;margin:12px 0 0;display:grid;gap:12px}
+.guide-steps li{counter-increment:g;position:relative;padding-left:44px;line-height:1.5}
+.guide-steps li:before{content:counter(g);position:absolute;left:0;top:-1px;width:30px;height:30px;border-radius:50%;
+  background:var(--soft);color:var(--accent);font-family:var(--serif);font-weight:700;font-size:15px;display:grid;place-items:center;border:1px solid var(--line)}
+
+/* Corps + onglets */
+main{padding:24px 16px 60px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:20;padding:12px 0;margin-bottom:18px;background:var(--bg)}
+.tab-btn{font-family:var(--sans);border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:9px 15px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;transition:.18s;box-shadow:var(--shadow-sm)}
+.tab-btn:hover{color:var(--ink);border-color:var(--accent);transform:translateY(-1px)}
+.tab-btn.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 8px 18px rgba(90,60,35,.22)}
+
+.panel{display:none}
+.panel.active{display:block;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+
+/* Cartes */
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card h2:first-child,.card h3:first-child{margin-top:0}
+.card>.badge:first-child{margin-bottom:10px}
+
+/* Puce rubrique */
+.badge{font-family:var(--sans);display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;
+  background:var(--soft);color:var(--accent-deep);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;border:1px solid var(--line-soft)}
+
+/* Citation / Écriture */
+.quote{font-family:var(--serif);font-size:16px;line-height:1.6;border-left:3px solid var(--gold);
+  padding:12px 16px;background:var(--card-2);border-radius:0 12px 12px 0;color:var(--ink)}
+.quote strong{font-family:var(--sans)}
+
+/* Avertissement */
+.notice{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--notice-bg);
+  border:1px solid var(--notice-border);color:var(--notice-ink);border-radius:16px;padding:14px 16px;margin-bottom:18px;font-size:14px;line-height:1.5}
+.notice:before{content:"";flex:0 0 4px;align-self:stretch;border-radius:4px;background:var(--rubric)}
+
+/* Progression */
+.progress-track{position:relative;height:14px;background:var(--soft);border-radius:999px;overflow:hidden;border:1px solid var(--line-soft)}
+.progress-bar{height:100%;width:0;border-radius:999px;transition:width .6s ease;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.12) 0 7px, transparent 7px 14px),
+    linear-gradient(90deg, var(--gold), var(--accent))}
+
+/* Boutons */
+button.primary,button.secondary,button.danger{font-family:var(--sans);border:0;border-radius:12px;padding:11px 16px;font-weight:800;font-size:14px;cursor:pointer;transition:.16s}
+button.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 16px rgba(90,60,35,.22)}
+button.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+button.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+button.secondary:hover{border-color:var(--accent);transform:translateY(-1px)}
+button.danger{background:var(--danger-soft);color:var(--danger)}
+button.danger:hover{filter:brightness(1.03);transform:translateY(-1px)}
+:where(button,a,input,textarea,select,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.data-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+/* Journal daté & historique des notes */
+.journal-compose{display:grid;gap:10px}
+.journal-compose .row{display:flex;justify-content:flex-end;gap:8px}
+.entry{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px;background:var(--card-2)}
+.entry-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.entry-date{font-size:11.5px;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.entry-text{white-space:pre-wrap;line-height:1.55}
+.entry-actions{display:flex;gap:4px;flex:0 0 auto}
+.icon-btn{border:0;background:transparent;color:var(--muted);cursor:pointer;font-weight:800;font-size:12.5px;padding:4px 9px;border-radius:8px;transition:.14s}
+.icon-btn:hover{background:var(--soft);color:var(--ink)}
+.icon-btn.del:hover{background:var(--danger-soft);color:var(--danger)}
+.empty{color:var(--faint);font-size:13.5px;margin-top:8px}
+.note-hist{margin-top:2px}
+.hist-toggle{border:0;background:transparent;color:var(--accent);font-family:var(--sans);font-weight:800;font-size:12px;cursor:pointer;padding:2px 0}
+.hist-toggle:hover{text-decoration:underline}
+.hist-list{margin-top:8px;display:grid;gap:8px}
+.hist-item{border-left:2px solid var(--line-soft);padding:5px 10px}
+.hist-date{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+.hist-text{white-space:pre-wrap;font-size:13.5px;line-height:1.5;margin:3px 0}
+.hist-actions{display:flex;gap:4px}
+
+/* Champs */
+textarea,input[type=text],input[type=email],input[type=password],select{
+  width:100%;font:inherit;font-family:var(--sans);color:var(--ink);background:var(--field-bg);
+  border:1px solid var(--line);border-radius:12px;padding:11px 13px;transition:border-color .15s, box-shadow .15s}
+textarea{min-height:96px;resize:vertical;line-height:1.5}
+textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(109,74,52,.14);outline:none}
+::placeholder{color:var(--faint)}
+.field{display:grid;gap:7px;margin-bottom:14px}
+.field label{font-weight:700;font-size:13.5px;color:var(--ink)}
+
+/* Cases quotidiennes */
+.checkline{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.checkline input{margin-top:3px;transform:scale(1.2);accent-color:var(--accent)}
+.day-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.day-head input[type=checkbox]{transform:scale(1.25);accent-color:var(--olive);cursor:pointer}
+
+/* Parcours 52 semaines */
+.week-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 12px}
+.week-title h2{margin:0}
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.week-card{position:relative;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:16px;padding:16px 16px 16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:var(--shadow-sm);transition:.18s}
+.week-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.week-card h3{margin:2px 0 0}
+.week-card strong{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}
+.week-card .field{margin-bottom:0}
+.week-card.done{background:linear-gradient(0deg, rgba(92,122,82,.07), rgba(92,122,82,.07)), var(--card)}
+.week-card.done:before{content:"✓";position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;
+  background:var(--olive);color:#fff;font-size:13px;font-weight:900;display:grid;place-items:center}
+.week-grid[data-phase="0"] .week-card{border-left-color:var(--ph0)}
+.week-grid[data-phase="1"] .week-card{border-left-color:var(--ph1)}
+.week-grid[data-phase="2"] .week-card{border-left-color:var(--ph2)}
+.week-grid[data-phase="3"] .week-card{border-left-color:var(--ph3)}
+.week-grid[data-phase="0"] .week-card .badge{color:var(--ph0)}
+.week-grid[data-phase="1"] .week-card .badge{color:var(--ph1)}
+.week-grid[data-phase="2"] .week-card .badge{color:var(--ph2)}
+.week-grid[data-phase="3"] .week-card .badge{color:var(--ph3)}
+.week-grid .week-card.done{border-left-color:var(--olive)}
+.week-title[data-phase="0"] .badge{color:var(--ph0)}
+.week-title[data-phase="1"] .badge{color:var(--ph1)}
+.week-title[data-phase="2"] .badge{color:var(--ph2)}
+.week-title[data-phase="3"] .badge{color:var(--ph3)}
+
+/* Tableaux */
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--card-2);font-family:var(--sans);font-weight:800;color:var(--accent-deep);font-size:13px;letter-spacing:.02em}
+tr:last-child td{border-bottom:0}
+
+/* Curseurs */
+.slider-row{display:grid;grid-template-columns:190px 1fr 54px;gap:14px;align-items:center;margin:14px 0}
+.slider-row label{font-weight:700;font-size:14px}
+input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;cursor:pointer;accent-color:var(--accent);
+  background:linear-gradient(90deg,var(--accent),var(--gold)) left/var(--p,50%) 100% no-repeat, var(--soft)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:var(--shadow-sm)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:var(--shadow-sm)}
+input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:transparent}
+.slider-row output{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--accent);text-align:center;background:var(--soft);border-radius:10px;padding:5px 0}
+
+/* Synthèse indicateurs */
+.metric-summary{display:flex;align-items:center;gap:16px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.gauge{--g:50%;flex:0 0 64px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--accent) var(--g), var(--soft) 0)}
+.gauge>span{width:48px;height:48px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--accent)}
+.metric-summary .lbl{font-weight:700}
+.metric-summary .sub{color:var(--muted);font-size:13px;margin-top:2px}
+
+/* Pied */
+footer{padding:28px 18px 34px;text-align:center;color:var(--muted);font-size:13px}
+footer:before{content:"";display:block;width:60px;height:1px;margin:0 auto 14px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+/* Coquille mobile — accueil */
+.mobile-home{min-height:calc(100vh - 170px);display:flex;align-items:stretch}
+.welcome-card{position:relative;overflow:hidden;color:#fdf6ee;border:0;min-height:520px;padding:30px;border-radius:26px;
+  background:linear-gradient(160deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-c) 100%);box-shadow:0 24px 60px rgba(50,32,20,.35)}
+.welcome-card:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-110px;top:-90px;background:rgba(255,255,255,.07)}
+.welcome-card:before{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--rubric),var(--gold),var(--olive))}
+.welcome-inner{position:relative;z-index:1;display:flex;flex-direction:column;min-height:460px}
+.welcome-mark{width:72px;height:72px;border-radius:20px;background:rgba(255,255,255,.13);display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);margin-bottom:26px}
+.welcome-mark svg{width:42px;height:42px;color:#f3dcc0}
+.verse{font-family:var(--serif);font-size:clamp(25px,5.5vw,38px);line-height:1.28;margin:12px 0 14px;max-width:850px;font-weight:500}
+.verse:before{content:"";display:block;width:46px;height:2px;background:var(--gold);opacity:.85;margin-bottom:18px}
+.verse-ref{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:#f2d3b4}
+.encouragement{margin-top:26px;padding:18px;border-radius:18px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);line-height:1.65;font-size:15px}
+.welcome-actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;padding-top:24px}
+.welcome-actions button{font-family:var(--sans);background:#fff;color:#5a3a28;border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer;transition:.16s}
+.welcome-actions button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.2)}
+.welcome-actions button:first-child{background:var(--gold);color:#3a2a12}
+.sync-pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 12px;background:rgba(255,255,255,.12);color:#f3e7db;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.16)}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#e0a24a;box-shadow:0 0 0 3px rgba(224,162,74,.22)}
+.sync-pill.online .sync-dot{background:#8fca8a;box-shadow:0 0 0 3px rgba(143,202,138,.22)}
+
+/* Navigation basse */
+.bottom-nav{display:none}
+
 @media(max-width:780px){
-  .wrap{max-width:100%}
-  .app-header-inner{min-height:72px;padding:10px 14px}
-  .brand-mark{width:42px;height:42px;border-radius:14px;font-size:24px}
-  .brand-title{font-size:21px}.brand-subtitle{font-size:11px}
-  .theme-toggle{width:40px;height:40px;border-radius:14px}
-  main{padding:12px 12px calc(112px + env(safe-area-inset-bottom))}
-  .home-shell{gap:13px}
-  .hero-home{min-height:535px;border-radius:22px;padding:22px 17px 112px}
-  .hero-copy blockquote{font-size:36px;margin-top:22px}
-  .continue-card{left:16px;right:16px;bottom:16px;min-height:82px;border-radius:20px}
-  .continue-card strong{font-size:17px}
-  .quick-grid{grid-template-columns:repeat(2,1fr)}
-  .quick-tile{min-height:118px}
-  .disclaimer-card{grid-template-columns:auto 1fr}.disclaimer-card .link-button{grid-column:2;justify-self:start}
-  .bottom-nav{
-    left:10px;right:10px;
-    bottom:max(6px,env(safe-area-inset-bottom));
-    min-height:66px;
-    padding:6px 8px;
-    border-radius:22px
-  }
-  .bottom-nav button{font-size:10px;padding:6px 2px}
-  .bottom-nav button .ico{font-size:22px;line-height:1}
-  .bottom-nav button.active{background:#f8ead7;color:#841b2d}
+  body{padding-bottom:80px}
+  header{padding:calc(16px + env(safe-area-inset-top)) 16px 16px}
+  header .hero-card{display:none}
+  header h1{font-size:26px}
+  header .subtitle{font-size:13px}
+  header .eyebrow{margin-bottom:8px}
+  main{padding:12px 12px 90px}
+  .tabs{display:none}
+  .card{border-radius:18px;padding:16px}
+  .grid{gap:12px}
+  .welcome-card{min-height:calc(100vh - 210px);border-radius:24px;padding:24px}
+  .welcome-inner{min-height:calc(100vh - 255px)}
+  .verse{font-size:28px}
+  .week-grid{grid-template-columns:1fr}
+  .week-card{padding:16px 16px 16px 18px}
+  .slider-row{grid-template-columns:1fr auto;grid-template-areas:"label out" "range range";gap:8px 12px}
+  .slider-row label{grid-area:label}
+  .slider-row output{grid-area:out}
+  .slider-row input[type=range]{grid-area:range}
+  table{font-size:13px;display:block;overflow-x:auto}
+  .span-4,.span-6,.span-8,.span-12{grid-column:span 12}
+  .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;z-index:60;
+    left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    box-shadow:0 14px 40px rgba(40,28,18,.22);padding:8px;backdrop-filter:blur(14px)}
+  .bottom-nav button{border:0;background:transparent;padding:8px 3px;border-radius:14px;font-size:10px;font-weight:800;
+    color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
+  .bottom-nav button .ico{display:grid;place-items:center}
+  .bottom-nav button .ico svg{width:22px;height:22px}
+  .bottom-nav button.active{background:var(--soft);color:var(--accent)}
 }
-@media(max-width:390px){
-  .hero-copy blockquote{font-size:32px}
-  .enc-text{font-size:14px}
-  .quick-tile strong{font-size:13px}
+
+@media (prefers-reduced-motion:reduce){
+  .panel.active{animation:none}
+  *{scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
+
+@media print{
+  .tabs,button,.hero-card,.header-tools,.bottom-nav,.notice{display:none!important}
+  #home{display:none!important}
+  .panel{display:block!important;animation:none}
+  body{background:#fff}
+  .card,.week-card{box-shadow:none;break-inside:avoid;border-color:#ccc}
+  header{background:#fff;color:#000;border-bottom:2px solid #000}
+  header:after{display:none}
+  .hero .eyebrow,.subtitle{color:#333}
 }
 
 </style>
+
+<style id="smartphone-only-v1">
+/* ==========================================================
+   ADAPTATION SMARTPHONE UNIQUEMENT
+   Desktop/tablette > 780px : aucun changement.
+   ========================================================== */
+@media (max-width: 780px){
+
+  :root{
+    --mobile-pad:14px;
+    --mobile-nav-h:74px;
+  }
+
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  body{
+    padding-bottom:calc(var(--mobile-nav-h) + 18px + env(safe-area-inset-bottom));
+    background:var(--bg);
+  }
+
+  /* ---------- En-tête compact ---------- */
+  header{
+    position:relative;
+    padding:calc(12px + env(safe-area-inset-top)) 62px 12px 14px;
+    min-height:auto;
+  }
+
+  header:after{height:2px}
+
+  .wrap{
+    width:100%;
+    max-width:100%;
+    margin:0;
+  }
+
+  .hero{
+    display:block;
+  }
+
+  .hero .eyebrow{
+    margin:0 0 4px;
+    font-size:9px;
+    line-height:1.25;
+    letter-spacing:.15em;
+    max-width:88%;
+  }
+
+  header h1{
+    font-size:22px;
+    line-height:1.06;
+    margin:0;
+    max-width:90%;
+  }
+
+  .subtitle{
+    font-size:11px;
+    line-height:1.35;
+    margin-top:5px;
+    max-width:92%;
+  }
+
+  .hero-card{
+    display:none!important;
+  }
+
+  .header-tools{
+    top:calc(10px + env(safe-area-inset-top));
+    right:10px;
+    gap:6px;
+  }
+
+  .hbtn{
+    width:36px;
+    height:36px;
+    font-size:16px;
+    background:rgba(255,255,255,.11);
+  }
+
+  /* ---------- Corps ---------- */
+  main{
+    padding:12px var(--mobile-pad) 18px;
+    width:100%;
+    max-width:100%;
+  }
+
+  .tabs{
+    display:none!important;
+  }
+
+  .notice{
+    border-radius:14px;
+    padding:11px 12px;
+    margin-bottom:12px;
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  /* ---------- Grilles / cartes ---------- */
+  .grid{
+    display:block;
+  }
+
+  .grid > *{
+    margin-bottom:12px;
+  }
+
+  .span-4,.span-6,.span-8,.span-12{
+    grid-column:auto;
+    width:100%;
+  }
+
+  .card{
+    width:100%;
+    border-radius:16px;
+    padding:15px;
+    box-shadow:var(--shadow-sm);
+  }
+
+  h2{
+    font-size:20px;
+    line-height:1.15;
+    margin-bottom:8px;
+  }
+
+  h3{
+    font-size:17px;
+    line-height:1.2;
+  }
+
+  p{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .small{
+    font-size:12px;
+  }
+
+  .metric{
+    font-size:30px;
+  }
+
+  .badge{
+    font-size:10px;
+    padding:4px 9px;
+  }
+
+  .quote{
+    font-size:15px;
+    line-height:1.5;
+    padding:10px 12px;
+  }
+
+  /* ---------- Accueil ---------- */
+  .mobile-home{
+    min-height:auto;
+    display:block;
+  }
+
+  .welcome-card{
+    min-height:auto;
+    border-radius:20px;
+    padding:20px 18px;
+  }
+
+  .welcome-inner{
+    min-height:auto;
+  }
+
+  .welcome-mark{
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    margin-bottom:15px;
+  }
+
+  .welcome-mark svg{
+    width:32px;
+    height:32px;
+  }
+
+  .verse{
+    font-size:27px;
+    line-height:1.18;
+    margin:12px 0 10px;
+  }
+
+  .verse:before{
+    width:38px;
+    margin-bottom:12px;
+  }
+
+  .verse-ref{
+    font-size:10px;
+  }
+
+  .encouragement{
+    margin-top:16px;
+    padding:14px;
+    border-radius:15px;
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  .sync-pill{
+    font-size:10px;
+    padding:6px 9px;
+  }
+
+  .welcome-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    padding-top:16px;
+  }
+
+  .welcome-actions button{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    font-size:13px;
+  }
+
+  /* ---------- Parcours 52 semaines ---------- */
+  .week-title{
+    display:block;
+    margin:20px 0 9px;
+  }
+
+  .week-title .badge{
+    margin-top:5px;
+  }
+
+  .week-grid{
+    display:grid;
+    grid-template-columns:1fr!important;
+    gap:10px;
+  }
+
+  .week-card{
+    width:100%;
+    padding:14px 14px 14px 16px;
+    border-radius:14px;
+    gap:8px;
+    box-shadow:none;
+  }
+
+  .week-card:hover{
+    transform:none;
+  }
+
+  .week-card h3{
+    font-size:16px;
+    padding-right:32px;
+  }
+
+  .week-card strong{
+    font-size:10.5px;
+  }
+
+  .day-head{
+    align-items:center;
+  }
+
+  .day-head input[type=checkbox]{
+    transform:scale(1.15);
+  }
+
+  /* ---------- Formulaires ---------- */
+  textarea,
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  select{
+    font-size:16px; /* empêche le zoom automatique iOS */
+    border-radius:11px;
+    padding:11px 12px;
+  }
+
+  textarea{
+    min-height:92px;
+  }
+
+  .field{
+    margin-bottom:12px;
+  }
+
+  .field label{
+    font-size:13px;
+  }
+
+  .checkline{
+    font-size:13px;
+    line-height:1.4;
+  }
+
+  /* ---------- Curseurs ---------- */
+  .slider-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-areas:
+      "label out"
+      "range range";
+    gap:7px 10px;
+    margin:12px 0;
+  }
+
+  .slider-row label{grid-area:label;font-size:13px}
+  .slider-row output{grid-area:out;font-size:17px;min-width:42px}
+  .slider-row input[type=range]{grid-area:range;width:100%}
+
+  .metric-summary{
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .gauge{
+    flex-basis:58px;
+    width:58px;
+    height:58px;
+  }
+
+  .gauge>span{
+    width:44px;
+    height:44px;
+    font-size:16px;
+  }
+
+  /* ---------- Tableaux : cartes lisibles sur téléphone ---------- */
+  table{
+    display:table;
+    width:100%;
+    min-width:0;
+    font-size:12.5px;
+  }
+
+  th,td{
+    padding:9px 8px;
+    word-break:normal;
+    overflow-wrap:anywhere;
+  }
+
+  /* Les tableaux larges restent scrollables */
+  .card{
+    overflow:hidden;
+  }
+
+  .card table{
+    display:block;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .card table tbody,
+  .card table thead{
+    min-width:100%;
+  }
+
+  /* ---------- Journal ---------- */
+  .entry{
+    padding:11px 12px;
+  }
+
+  .entry-head{
+    align-items:flex-start;
+  }
+
+  .entry-actions{
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  .data-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .data-actions button{
+    width:100%;
+  }
+
+  /* ---------- Boutons ---------- */
+  button.primary,
+  button.secondary,
+  button.danger{
+    min-height:44px;
+    font-size:13px;
+  }
+
+  /* ---------- Navigation fixe basse ---------- */
+  .bottom-nav{
+    display:grid!important;
+    grid-template-columns:repeat(5,1fr);
+    position:fixed;
+    z-index:100;
+    left:8px;
+    right:8px;
+    bottom:max(7px,env(safe-area-inset-bottom));
+    min-height:var(--mobile-nav-h);
+    padding:6px;
+    border-radius:20px;
+    background:color-mix(in srgb,var(--card) 94%,transparent);
+    border:1px solid var(--line);
+    box-shadow:0 12px 34px rgba(40,28,18,.20);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+
+  .bottom-nav button{
+    min-width:0;
+    min-height:58px;
+    padding:6px 2px;
+    gap:2px;
+    font-size:9.5px;
+    line-height:1.1;
+    border-radius:13px;
+  }
+
+  .bottom-nav button .ico svg{
+    width:21px;
+    height:21px;
+  }
+
+  .bottom-nav button.active{
+    background:var(--soft);
+  }
+
+  /* ---------- Guide ---------- */
+  .guide-steps{
+    gap:10px;
+  }
+
+  .guide-steps li{
+    padding-left:40px;
+    font-size:13.5px;
+  }
+
+  .guide-steps li:before{
+    width:28px;
+    height:28px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:14px 14px 8px;
+    font-size:11px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 390px){
+  header h1{font-size:20px}
+  .subtitle{font-size:10.5px}
+  .verse{font-size:24px}
+  .card{padding:14px}
+  .week-card{padding:13px 13px 13px 15px}
+  .bottom-nav{left:6px;right:6px}
+  .bottom-nav button{font-size:9px}
+}
+</style>
+
 </head>
 <body>
-<header class="app-header">
-<div class="wrap app-header-inner">
-  <div class="brand-mark" aria-hidden="true"><img src="./assets/icons/heart.svg" alt=""></div>
-  <div class="brand-copy">
-    <div class="brand-title">Kaizen du Mariage</div>
-    <div class="brand-subtitle">Parcours conjugal & spirituel · 52 semaines</div>
-  </div>
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☾</button>
+<header>
+<div class="header-tools">
+<button class="hbtn" id="guideBtn" type="button" aria-label="Guide d'utilisation" title="Comment utiliser l'outil" onclick="switchTab('guide')">?</button>
+<button class="hbtn" id="themeToggle" type="button" aria-label="Basculer entre le thème clair et sombre" title="Thème clair / sombre"></button>
+</div>
+<div class="wrap hero">
+<div><span class="eyebrow">Parcours conjugal &amp; spirituel · 52 semaines</span><h1>Kaizen du Mariage — 1 an</h1><p class="subtitle">52 semaines pour travailler progressivement les blessures émotionnelles, restaurer la sécurité, mieux communiquer, approfondir la vie spirituelle et reconstruire la proximité.</p></div>
+<div class="hero-card"><div class="small">Le principe</div><strong>Un petit progrès fidèle, humain et spirituel, répété dans le temps.</strong></div>
 </div>
 </header>
 
 <main class="wrap">
+<div class="notice">Ce parcours accompagne le dialogue et la vie spirituelle du couple. Il ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale. En cas de violence, menace, coercition ou peur, la priorité est la sécurité.</div>
+
 <nav class="tabs">
 <button class="tab-btn active" data-tab="home">Accueil</button>
+<button class="tab-btn" data-tab="guide">Guide</button>
 <button class="tab-btn" data-tab="method">Comprendre la méthode</button>
 <button class="tab-btn" data-tab="dashboard">Tableau de bord</button>
 <button class="tab-btn" data-tab="year">Parcours 52 semaines</button>
@@ -211,71 +816,97 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <button class="tab-btn" data-tab="wounds">Blessures</button>
 <button class="tab-btn" data-tab="weekly">Réunion hebdo</button>
 <button class="tab-btn" data-tab="monthly">Bilan mensuel</button>
-<button class="tab-btn" data-tab="guide">Guide</button>
 <button class="tab-btn" data-tab="metrics">Suivi</button>
 </nav>
 
 <section class="panel active" id="home">
-<div class="home-shell">
-
-  <section class="hero-home">
-    <div class="hero-media" aria-hidden="true"><img src="./assets/hero/couple_sunset_hd.jpg" alt=""></div>
-    <div class="hero-glow"></div>
-    <div class="hero-copy">
-      <div class="eyebrow"><img src="./assets/icons/book.svg" class="eyebrow-icon" alt=""> PAROLE DU JOUR</div>
-      <blockquote>« Par-dessus tout cela,<br>ayez <em>l’amour</em>, qui est<br>le lien de la perfection. »</blockquote>
-      <div class="hero-ref">COLOSSIENS 3,14</div>
-      <div class="hero-divider"></div>
-      <div class="enc-title"><img src="./assets/icons/heart.svg" class="enc-icon" alt=""> PAROLE D’ENCOURAGEMENT</div>
-      <p class="enc-text">Même lorsque l’histoire porte des blessures, aujourd’hui peut devenir le premier petit pas d’une manière nouvelle de vous aimer.</p>
+<div class="mobile-home">
+  <div class="card welcome-card span-12" style="width:100%">
+    <div class="welcome-inner">
+      <div class="welcome-mark" aria-hidden="true"><svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"><circle cx="0" cy="-15" r="21"/><circle cx="13" cy="8" r="21"/><circle cx="-13" cy="8" r="21"/></svg></div>
+      <span class="badge" style="width:max-content;background:rgba(255,255,255,.15);color:#fff">Kaizen du Mariage · 52 semaines</span>
+      <div class="verse">« Par-dessus tout cela, ayez l’amour, qui est le lien de la perfection. »</div>
+      <div class="verse-ref">Colossiens 3,14</div>
+      <div class="encouragement">
+        Votre histoire ne se résume pas aux blessures accumulées. Aujourd’hui, vous n’avez pas besoin de tout résoudre : choisissez simplement un geste plus doux, une parole plus vraie, une écoute plus profonde et un pas de plus vers l’autre.
+      </div>
+      <div style="margin-top:18px"><span class="sync-pill online"><span class="sync-dot"></span><span>Enregistré sur cet appareil</span></span></div>
+      <div class="welcome-actions">
+        <button onclick="openCurrent()">Continuer mon parcours</button>
+        <button onclick="switchTab('spiritual')">Prier aujourd'hui</button>
+      </div>
     </div>
-
-    <button class="continue-card" onclick="openCurrent()">
-      <span class="continue-icon">→</span>
-      <span><strong>Continuer mon parcours</strong><small id="homeWeekLabel">Semaine 1 / 52</small></span>
-    </button>
-  </section>
-
-  <section class="home-card progress-card">
-    <div class="home-section-head">
-      <strong>↗ &nbsp; MA PROGRESSION</strong>
-      <button class="link-button" onclick="switchTab('metrics')">Voir le suivi ›</button>
-    </div>
-    <div class="progress-track home-progress"><div class="progress-bar" id="homeProgressBar"></div></div>
-    <div class="progress-row"><span id="homeProgressWeeks">0 / 52 semaines</span><strong id="homeProgressPct">0%</strong></div>
-  </section>
-
-  <section class="home-card">
-    <div class="home-section-head quick-heading"><strong><img src="./assets/icons/star.svg" alt="" class="ui-icon heading-icon" aria-hidden="true"><span>ACCÈS RAPIDES</span></strong></div>
-    <div class="quick-grid">
-      <button class="quick-tile q1" onclick="switchTab('year')"><img src="./assets/icons/heart.svg" alt="" class="ui-icon quick-icon" aria-hidden="true"><strong>Parcours</strong><small>Plan des 52 semaines</small></button>
-      <button class="quick-tile q2" onclick="switchTab('spiritual')"><img src="./assets/icons/prayer.svg" alt="" class="ui-icon quick-icon" aria-hidden="true"><strong>Prière du jour</strong><small>Temps avec Dieu</small></button>
-      <button class="quick-tile q3" onclick="switchTab('wounds')"><img src="./assets/icons/wounds.svg" alt="" class="ui-icon quick-icon" aria-hidden="true"><strong>Blessures</strong><small>Cartographier et guérir</small></button>
-      <button class="quick-tile q4" onclick="switchTab('metrics')"><img src="./assets/icons/progress.svg" alt="" class="ui-icon quick-icon" aria-hidden="true"><strong>Suivi</strong><small>Mes progrès et bilans</small></button>
-    </div>
-  </section>
-
-<section class="home-card guide-cta">
-  <div class="guide-cta-icon"><img src="./assets/icons/book.svg" alt=""></div>
-  <div class="guide-cta-copy">
-    <strong>Comment utiliser l’outil ?</strong>
-    <span>Commencer, travailler une semaine, faire les bilans et sauvegarder vos données.</span>
   </div>
-  <button class="link-button guide-link" onclick="switchTab('guide')">Ouvrir le guide ›</button>
+</div>
 </section>
 
+<section class="panel" id="guide">
+<div class="grid">
 
-  <section class="disclaimer-card">
-    <span class="shield"><img src="./assets/icons/shield.svg" alt="" class="ui-icon shield-icon" aria-hidden="true"></span>
-    <div>
-      <div class="disclaimer-short">Ce parcours ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale.</div>
-      <div class="disclaimer-more" id="disclaimerMore">En cas de violence, menace, coercition, peur ou danger, la priorité est la sécurité et l’aide professionnelle appropriée.</div>
-    </div>
-    <button class="link-button" id="disclaimerToggle" onclick="toggleDisclaimer()">En savoir plus</button>
-  </section>
+<div class="card span-12">
+<span class="badge">Prise en main</span>
+<h2>Comment utiliser l'outil</h2>
+<p>Cet outil est un compagnon de route pour un an. Il ne se remplit pas d'un seul coup : on avance par petits pas, une semaine à la fois. Voici l'essentiel pour vous en servir sereinement.</p>
+<div class="quote"><strong>L'esprit :</strong> pas de performance. Un petit geste vrai, répété, vaut mieux qu'un grand élan sans lendemain.</div>
+</div>
+
+<div class="card span-6">
+<h3>Pour bien démarrer</h3>
+<ol class="guide-steps">
+<li>Depuis l'<strong>Accueil</strong>, touchez <em>« Continuer mon parcours »</em> pour ouvrir la semaine en cours.</li>
+<li>Lisez l'<strong>exercice relationnel</strong> et l'<strong>exercice spirituel</strong> de la semaine, puis essayez-les dans la vraie vie.</li>
+<li>Écrivez ce que vous remarquez dans la case <strong>« Ce que nous observons »</strong>.</li>
+<li>Cochez la semaine <strong>seulement après l'avoir vraiment tentée</strong>. Une semaine difficile peut être répétée avant de continuer.</li>
+<li>Une fois par semaine, faites la <strong>Réunion hebdo</strong> à deux ; une fois par mois, le <strong>Bilan mensuel</strong>.</li>
+</ol>
+</div>
+
+<div class="card span-6">
+<h3>Le bon rythme</h3>
+<table><tbody>
+<tr><th>Chaque jour</th><td>Le minimum relationnel et spirituel (Tableau de bord, Vie spirituelle) — quelques minutes.</td></tr>
+<tr><th>Chaque semaine</th><td>La fiche de la semaine (Parcours) et la Réunion hebdo — 30 à 45 min.</td></tr>
+<tr><th>Chaque mois</th><td>Le Bilan mensuel et le relevé des indicateurs (Suivi) — 45 à 60 min.</td></tr>
+<tr><th>Tous les 3 mois</th><td>La semaine « Bilan du trimestre » clôt chaque phase.</td></tr>
+</tbody></table>
+</div>
+
+<div class="card span-12">
+<h3>À quoi sert chaque onglet</h3>
+<table><thead><tr><th>Onglet</th><th>Ce que vous y faites</th></tr></thead><tbody>
+<tr><td><strong>Accueil</strong></td><td>Une parole pour aujourd'hui et l'accès direct à votre semaine en cours.</td></tr>
+<tr><td><strong>Comprendre la méthode</strong></td><td>Le principe du Kaizen appliqué au couple et les cinq règles du dialogue.</td></tr>
+<tr><td><strong>Tableau de bord</strong></td><td>Cocher le minimum quotidien, fixer l'objectif de la semaine, suivre la progression.</td></tr>
+<tr><td><strong>Parcours 52 semaines</strong></td><td>La fiche de chaque semaine : exercices, note d'observation et historique des versions.</td></tr>
+<tr><td><strong>Vie spirituelle</strong></td><td>Le rituel de prière en 6 étapes et l'examen personnel.</td></tr>
+<tr><td><strong>Blessures</strong></td><td>Cartographier jusqu'à trois blessures — de préférence une seule à la fois.</td></tr>
+<tr><td><strong>Réunion hebdo</strong></td><td>Les sept questions à vous poser ensemble chaque semaine.</td></tr>
+<tr><td><strong>Bilan mensuel</strong></td><td>Les huit questions du bilan du mois.</td></tr>
+<tr><td><strong>Suivi</strong></td><td>Les indicateurs, le journal daté, l'impression et la sauvegarde.</td></tr>
+</tbody></table>
+<p class="muted small">Sur téléphone, la barre du bas donne accès aux onglets principaux ; les autres s'ouvrent depuis l'Accueil et le bouton <strong>?</strong>. Sur ordinateur, tous les onglets sont en haut de la page.</p>
+</div>
+
+<div class="card span-6">
+<h3>Écrire et garder une trace</h3>
+<p><strong>Notes de semaine.</strong> Ce que vous tapez est enregistré au fil de la frappe. Dès que vous quittez la case, une <strong>version datée</strong> est archivée. La ligne <em>« Historique des versions »</em> apparaît alors sous la note : vous pouvez y relire ou <strong>restaurer</strong> un ancien texte.</p>
+<p><strong>Journal daté.</strong> Dans l'onglet Suivi, chaque note ajoutée est <strong>horodatée et conservée</strong> — un vrai fil au long de l'année. Astuce : Ctrl+Entrée pour ajouter rapidement.</p>
+</div>
+
+<div class="card span-6">
+<h3>Vos données &amp; la sauvegarde</h3>
+<p>Tout est enregistré <strong>uniquement dans ce navigateur, sur cet appareil</strong> — rien n'est envoyé sur Internet.</p>
+<p>Pour ne rien perdre lors d'un changement d'appareil ou d'un nettoyage du navigateur, ouvrez <strong>Suivi → Mes données</strong> : <strong>Exporter</strong> télécharge un fichier de sauvegarde, <strong>Importer</strong> le recharge (y compris sur un autre appareil). Un bon réflexe : exporter après chaque bilan mensuel.</p>
+<p class="muted small">En haut de l'écran : le bouton <strong>?</strong> ouvre ce guide, l'icône lune/soleil bascule le thème clair ou sombre.</p>
+</div>
+
+<div class="card span-12">
+<div class="notice" style="margin:0"><div><strong>Un repère important.</strong> Cet outil soutient le dialogue et la prière ; il ne remplace pas une thérapie de couple, un accompagnement pastoral qualifié ou un professionnel de santé mentale. En cas de violence, de menace, de peur ou d'emprise, la sécurité passe avant tout le reste.</div></div>
+</div>
 
 </div>
 </section>
+
 <section class="panel" id="method">
 <div class="grid">
 <div class="card span-12"><span class="badge">Avant de commencer</span><h2 style="margin-top:12px">Kaizen appliqué au mariage</h2>
@@ -314,22 +945,6 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <tr><th>Ajustement</th><td>Modifier ensemble la façon d'annoncer la pause et de revenir au dialogue.</td></tr>
 </tbody></table>
 </div>
-
-<div class="card span-12">
-  <h2>Bibliothèque visuelle du parcours</h2>
-  <p class="muted">Ces images sont intégrées directement dans l'application et stockées dans le dossier <code>assets/</code> du dépôt GitHub.</p>
-  <div class="asset-showcase">
-    <img src="./assets/hero/couple_sunset.jpg" alt="Couple au coucher du soleil">
-    <img src="./assets/hero/couple_walking.jpg" alt="Couple en chemin">
-    <img src="./assets/hero/bible_prayer.jpg" alt="Bible et prière">
-    <img src="./assets/hero/cross_mountain.jpg" alt="Croix">
-    <img src="./assets/themes/dialogue.jpg" alt="Dialogue">
-    <img src="./assets/themes/prayer_together.jpg" alt="Prière">
-    <img src="./assets/themes/reconciliation.jpg" alt="Réconciliation">
-    <img src="./assets/themes/new_growth.jpg" alt="Nouvelle croissance">
-  </div>
-</div>
-
 </div>
 </section>
 
@@ -393,127 +1008,6 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <section class="panel" id="monthly"><div class="card"><h2>Bilan mensuel — 45 à 60 minutes</h2><p class="muted">Choisissez le mois puis faites le bilan ensemble.</p>
 <div class="field"><label>Mois</label><select id="monthlySelect"></select></div><div id="monthlyForm"></div></div></section>
 
-
-<section class="panel" id="guide">
-<div class="grid">
-
-  <div class="card span-12 guide-hero">
-    <span class="badge">Guide d’utilisation</span>
-    <h2 style="margin-top:12px">Comment utiliser Kaizen du Mariage</h2>
-    <p class="muted">L’outil est conçu comme un parcours d’un an. Il ne faut pas chercher à tout faire en même temps. Travaillez une semaine à la fois, notez ce qui se passe réellement dans votre couple, puis ajustez progressivement.</p>
-    <div class="quote"><strong>Rythme conseillé :</strong> 10 à 20 minutes par jour + une réunion de couple de 30 à 45 minutes par semaine + un bilan mensuel.</div>
-  </div>
-
-  <div class="card span-6">
-    <h3>1. Commencer le parcours</h3>
-    <p>Depuis <strong>Accueil</strong>, appuyez sur <strong>Continuer mon parcours</strong>. L’application vous conduit vers la première semaine non terminée.</p>
-    <p>Chaque semaine contient :</p>
-    <ul class="guide-list">
-      <li>un objectif relationnel ;</li>
-      <li>un exercice concret à tester ;</li>
-      <li>un exercice spirituel ;</li>
-      <li>un espace pour noter ce que vous observez.</li>
-    </ul>
-    <p class="muted small">Ne cochez une semaine comme terminée que lorsque vous avez réellement essayé l’exercice.</p>
-  </div>
-
-  <div class="card span-6">
-    <h3>2. Travailler une blessure</h3>
-    <p>Dans <strong>Blessures</strong>, choisissez au maximum trois blessures actives. Pour chacune, séparez :</p>
-    <ul class="guide-list">
-      <li>le fait précis ;</li>
-      <li>l’émotion ressentie ;</li>
-      <li>l’interprétation que vous en avez faite ;</li>
-      <li>le besoin actuel ;</li>
-      <li>la petite correction concrète à tester.</li>
-    </ul>
-    <p>Une blessure ancienne n’a pas besoin d’être « réglée » en une seule conversation. L’objectif est de diminuer progressivement son impact sur la relation.</p>
-  </div>
-
-  <div class="card span-6">
-    <h3>3. Utiliser la Vie spirituelle</h3>
-    <p>L’onglet <strong>Vie spirituelle</strong> propose un rituel quotidien de 10 à 15 minutes :</p>
-    <ol class="guide-list">
-      <li>se mettre en présence de Dieu ;</li>
-      <li>lire un court passage biblique ;</li>
-      <li>faire un examen du cœur ;</li>
-      <li>exprimer une gratitude ;</li>
-      <li>demander une grâce ;</li>
-      <li>terminer par une prière commune.</li>
-    </ol>
-    <p class="muted small">La prière ne remplace pas une demande de pardon, une limite saine ou un changement de comportement.</p>
-  </div>
-
-  <div class="card span-6">
-    <h3>4. Faire la réunion hebdomadaire</h3>
-    <p>Une fois par semaine, ouvrez <strong>Réunion hebdo</strong> et choisissez la semaine concernée.</p>
-    <p>Répondez ensemble aux questions, en commençant par ce qui a été positif. Cherchez ensuite le cycle qui revient et choisissez <strong>une seule petite amélioration</strong> pour la semaine suivante.</p>
-    <div class="quote">La question importante n’est pas seulement : « Avons-nous eu un conflit ? » mais : « L’avons-nous mieux géré que la fois précédente ? »</div>
-  </div>
-
-  <div class="card span-6">
-    <h3>5. Faire le bilan mensuel</h3>
-    <p>Dans <strong>Bilan mensuel</strong>, faites une pause toutes les quatre semaines environ pour observer les tendances :</p>
-    <ul class="guide-list">
-      <li>ce qui s’améliore ;</li>
-      <li>la blessure qui se réactive le plus ;</li>
-      <li>le cycle négatif encore présent ;</li>
-      <li>ce qui a été mieux géré ;</li>
-      <li>la priorité du mois suivant.</li>
-    </ul>
-  </div>
-
-  <div class="card span-6">
-    <h3>6. Suivre les progrès</h3>
-    <p>Dans <strong>Suivi</strong>, attribuez une note de 0 à 10 à cinq dimensions :</p>
-    <ul class="guide-list">
-      <li>sécurité émotionnelle ;</li>
-      <li>qualité du dialogue ;</li>
-      <li>affection et proximité ;</li>
-      <li>capacité à réparer ;</li>
-      <li>confiance.</li>
-    </ul>
-    <p>Ces notes servent à observer une tendance. Elles ne doivent jamais devenir une note donnée à votre conjoint.</p>
-  </div>
-
-  <div class="card span-6">
-    <h3>7. Quand faire une pause ?</h3>
-    <p>Si la discussion devient trop intense, utilisez une pause annoncée :</p>
-    <div class="quote">« Je suis trop bouleversé pour continuer correctement. J’ai besoin d’une pause. Je ne t’abandonne pas. Nous reprendrons cette discussion. »</div>
-    <p>La pause doit être suivie d’un retour réel au dialogue. Le silence punitif n’est pas une pause Kaizen.</p>
-  </div>
-
-  <div class="card span-6">
-    <h3>8. Sauvegarder vos réponses</h3>
-    <p>Les données sont enregistrées localement dans le navigateur du téléphone ou de l’ordinateur utilisé.</p>
-    <p>Dans <strong>Suivi → Sauvegarde de mes données</strong> :</p>
-    <ul class="guide-list">
-      <li><strong>Exporter ma sauvegarde</strong> crée un fichier JSON ;</li>
-      <li><strong>Restaurer une sauvegarde</strong> recharge ce fichier sur un autre appareil.</li>
-    </ul>
-    <p class="muted small">Faites régulièrement un export si les notes sont importantes pour vous.</p>
-  </div>
-
-  <div class="card span-12">
-    <h3>Le bon rythme sur une semaine</h3>
-    <div class="guide-week">
-      <div><span>Jour 1</span><strong>Lire l’objectif</strong><small>Comprendre l’exercice de la semaine.</small></div>
-      <div><span>Jours 2–5</span><strong>Tester</strong><small>Mettre en pratique la petite correction.</small></div>
-      <div><span>Jour 6</span><strong>Observer</strong><small>Noter ce qui a aidé ou aggravé la situation.</small></div>
-      <div><span>Jour 7</span><strong>Faire le bilan</strong><small>Réunion hebdomadaire et prochaine amélioration.</small></div>
-    </div>
-  </div>
-
-  <div class="card span-12">
-    <h3>Ce que l’outil ne doit pas devenir</h3>
-    <p>Il ne doit pas servir à comptabiliser les fautes de l’autre, imposer un pardon immédiat, prouver qui fait le plus d’efforts ou forcer une conversation lorsque l’un des deux ne se sent pas en sécurité.</p>
-    <p>Lorsque les conflits impliquent violence, peur, menace, coercition ou danger, la priorité est la sécurité et l’aide professionnelle appropriée.</p>
-    <button class="primary" onclick="openCurrent()">Continuer mon parcours</button>
-  </div>
-
-</div>
-</section>
-
 <section class="panel" id="metrics">
 <div class="grid"><div class="card span-12"><h2>Indicateurs de la relation</h2><p class="muted">De 0 à 10. Le but est d'observer une tendance, pas de noter votre conjoint.</p>
 <div class="slider-row"><label>Sécurité émotionnelle</label><input type="range" min="0" max="10" id="m_security"><output>5</output></div>
@@ -521,28 +1015,37 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <div class="slider-row"><label>Affection / proximité</label><input type="range" min="0" max="10" id="m_affection"><output>5</output></div>
 <div class="slider-row"><label>Capacité à réparer</label><input type="range" min="0" max="10" id="m_repair"><output>5</output></div>
 <div class="slider-row"><label>Confiance</label><input type="range" min="0" max="10" id="m_trust"><output>5</output></div>
+<div class="metric-summary"><div class="gauge" id="metricGauge"><span id="metricGaugeVal">5.0</span></div><div><div class="lbl">Climat relationnel — moyenne</div><div class="sub">Observez surtout l'évolution d'une semaine à l'autre, pas le chiffre isolé.</div></div></div>
 </div>
-<div class="card span-12"><h3>Journal libre</h3><textarea id="journal"></textarea></div>
-<div class="card span-12">
-      <h3>Sauvegarde de mes données</h3>
-      <p class="muted small">Les réponses sont conservées sur cet appareil. Exportez régulièrement une sauvegarde pour pouvoir les restaurer sur un autre téléphone.</p>
-      <div class="backup-actions">
-        <button class="primary" onclick="exportData()">Exporter ma sauvegarde</button>
-        <label class="secondary file-button">Restaurer une sauvegarde<input type="file" accept=".json,application/json" onchange="importData(event)" hidden></label>
-        <button class="secondary" onclick="window.print()">Imprimer / PDF</button>
-        <button class="danger" onclick="resetAll()">Réinitialiser</button>
-      </div>
-    </div>
+<div class="card span-12"><h3>Journal daté</h3>
+<p class="muted small">Chaque entrée est horodatée et conservée : un vrai fil chronologique pour suivre l'évolution semaine après semaine. (Astuce : Ctrl+Entrée pour ajouter.)</p>
+<div class="journal-compose">
+<textarea id="journalInput" placeholder="Écrire une note pour aujourd'hui…"></textarea>
+<div class="row"><button class="primary" onclick="addJournalEntry()">Ajouter au journal</button></div>
+</div>
+<div id="journalList" style="margin-top:14px"></div>
+</div>
+<div class="card span-12"><h3>Mes données &amp; sauvegarde</h3>
+<p class="muted small">Vos réponses et votre progression sont enregistrées uniquement dans ce navigateur, sur cet appareil. Exportez régulièrement une sauvegarde pour ne rien perdre — puis réimportez-la sur un autre appareil ou après un nettoyage du navigateur.</p>
+<div class="data-actions">
+<button class="primary" onclick="exportData()">Exporter une sauvegarde</button>
+<button class="secondary" onclick="document.getElementById('importFile').click()">Importer une sauvegarde</button>
+<button class="secondary" onclick="window.print()">Imprimer / PDF</button>
+<button class="danger" onclick="resetAll()">Réinitialiser</button>
+</div>
+<input type="file" id="importFile" accept="application/json,.json" hidden onchange="importData(this)">
+<div id="backupMsg" class="small" style="margin-top:10px;color:var(--olive);font-weight:700"></div>
+</div>
 </div>
 </section>
 </main>
 
 <nav class="bottom-nav" aria-label="Navigation mobile">
-  <button data-mobile-tab="home" class="active"><img src="./assets/icons/home.svg" class="nav-icon" alt=""><span>Accueil</span></button>
-  <button data-mobile-tab="year"><img src="./assets/icons/journey.svg" class="nav-icon" alt=""><span>Parcours</span></button>
-  <button data-mobile-tab="spiritual"><img src="./assets/icons/prayer.svg" class="nav-icon" alt=""><span>Prière</span></button>
-  <button data-mobile-tab="wounds"><img src="./assets/icons/heart.svg" class="nav-icon" alt=""><span>Blessures</span></button>
-  <button data-mobile-tab="metrics"><img src="./assets/icons/progress.svg" class="nav-icon" alt=""><span>Suivi</span></button>
+  <button data-mobile-tab="home" class="active"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10.2V20h12v-9.8"/></svg></span>Accueil</button>
+  <button data-mobile-tab="year"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h6a4 4 0 0 1 0 8H10a4 4 0 0 0 0 8"/></svg></span>Parcours</button>
+  <button data-mobile-tab="spiritual"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.6 2.3 3 4 3 6.4A3 3 0 0 1 12 12a3 3 0 0 1-3-2.6C9 7 10.4 5.3 12 3z"/><path d="M6.5 21c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/></svg></span>Prière</button>
+  <button data-mobile-tab="wounds"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-6.5-4.3-8.6-8.3C1.9 8.6 3.3 5.5 6.3 5.5c1.9 0 3.1 1.1 3.7 2.1.6-1 1.8-2.1 3.7-2.1 3 0 4.4 3.1 2.9 6.2C18.5 15.7 12 20 12 20z"/></svg></span>Blessures</button>
+  <button data-mobile-tab="metrics"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M7.5 16l3.2-3.6 2.6 2.2L18 9"/></svg></span>Suivi</button>
 </nav>
 
 <footer>Parcours annuel — données enregistrées uniquement dans le navigateur de cet appareil.</footer>
@@ -615,9 +1118,13 @@ const weeklyQs=["Qu'est-ce qui m'a fait du bien cette semaine ?","Qu'est-ce qui 
 const monthlyQs=["Quelle a été notre plus belle amélioration ce mois-ci ?","Quelle blessure s'est le plus réveillée ?","Quel cycle négatif reste actif ?","Qu'avons-nous mieux géré qu'avant ?","Quel geste spirituel nous a fait du bien ?","Qu'est-ce qui demande encore réparation ?","Avons-nous besoin d'une aide extérieure pour un point précis ?","Quelle sera notre priorité Kaizen le mois prochain ?"];
 
 const key="kaizenMarriageYear";let state=JSON.parse(localStorage.getItem(key)||"{}");
-state.done=state.done||{};state.notes=state.notes||{};state.wounds=state.wounds||[{},{},{}];state.weekly=state.weekly||Array.from({length:52},()=>({}));state.monthly=state.monthly||Array.from({length:12},()=>({}));state.metrics=state.metrics||{};state.daily=state.daily||{};state.spiritual=state.spiritual||{};
+state.done=state.done||{};state.notes=state.notes||{};state.wounds=state.wounds||[{},{},{}];state.weekly=state.weekly||Array.from({length:52},()=>({}));state.monthly=state.monthly||Array.from({length:12},()=>({}));state.metrics=state.metrics||{};state.daily=state.daily||{};state.spiritual=state.spiritual||{};state.journalEntries=state.journalEntries||[];state.notesHistory=state.notesHistory||{};
+if(state.journal&&!state.journalEntries.length){state.journalEntries=[{id:uid(),ts:Date.now(),text:state.journal}];state.journal="";}
 const esc=v=>String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-function save(){localStorage.setItem(key,JSON.stringify(state));updateDashboard()}
+function save(){
+  localStorage.setItem(key,JSON.stringify(state));
+  updateDashboard();
+}
 function switchTab(id){
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));
   document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
@@ -626,217 +1133,174 @@ function switchTab(id){
 }
 document.querySelectorAll(".tab-btn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
 
-
-function phaseImage(item){
-  if(item.w<=13) return "./assets/themes/dialogue.jpg";
-  if(item.w<=26) return "./assets/themes/prayer_together.jpg";
-  if(item.w<=39) return "./assets/themes/reconciliation.jpg";
-  return "./assets/themes/new_growth.jpg";
-}
-
-function renderWeeks(){const host=document.getElementById("yearWeeks");phases.forEach(p=>{const h=document.createElement("div");h.className="week-title";h.innerHTML=`<h2>${p.name}</h2><span class="badge">${p.range}</span>`;host.appendChild(h);const g=document.createElement("div");g.className="week-grid";weeks.filter(x=>x.phase===p.name).forEach(item=>{const c=document.createElement("div");c.className="week-card"+(state.done[item.w]?" done":"");c.id="week-"+item.w;c.innerHTML=`<div class="day-head"><span class="badge">Semaine ${item.w}</span><input type="checkbox" ${state.done[item.w]?"checked":""} onchange="toggleWeek(${item.w},this.checked)"></div><img class="week-illustration" src="${phaseImage(item)}" alt=""><h3>${item.title}</h3><div><strong>Exercice relationnel</strong><p>${item.action}</p></div><div><strong>Exercice spirituel</strong><div class="quote">${item.spiritual}</div></div><div class="field"><label>Ce que nous observons</label><textarea oninput="state.notes[${item.w}]=this.value;save()">${esc(state.notes[item.w])}</textarea></div>`;g.appendChild(c)});host.appendChild(g)})}
+function renderWeeks(){const host=document.getElementById("yearWeeks");phases.forEach((p,pi)=>{const h=document.createElement("div");h.className="week-title";h.dataset.phase=pi;h.innerHTML=`<h2>${p.name}</h2><span class="badge">${p.range}</span>`;host.appendChild(h);const g=document.createElement("div");g.className="week-grid";g.dataset.phase=pi;weeks.filter(x=>x.phase===p.name).forEach(item=>{const c=document.createElement("div");c.className="week-card"+(state.done[item.w]?" done":"");c.id="week-"+item.w;c.innerHTML=`<div class="day-head"><span class="badge">Semaine ${item.w}</span><input type="checkbox" ${state.done[item.w]?"checked":""} onchange="toggleWeek(${item.w},this.checked)"></div><h3>${item.title}</h3><div><strong>Exercice relationnel</strong><p>${item.action}</p></div><div><strong>Exercice spirituel</strong><div class="quote">${item.spiritual}</div></div><div class="field"><label>Ce que nous observons</label><textarea oninput="state.notes[${item.w}]=this.value;save()" onblur="commitWeekNote(${item.w},this.value)">${esc(state.notes[item.w])}</textarea></div><div class="note-hist" data-w="${item.w}"></div>`;g.appendChild(c)});host.appendChild(g)})}
 function toggleWeek(w,v){state.done[w]=v;document.getElementById("week-"+w).classList.toggle("done",v);save()}
-function updateDashboard(){
-  const complete=Object.values(state.done).filter(Boolean).length;
-  const pct=Math.round(complete/52*100);
-  ["progressBar","yearProgressBar","homeProgressBar"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.width=pct+"%"});
-  ["progressText","yearProgressText"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=pct+"%"});
-  const hp=document.getElementById("homeProgressPct");if(hp)hp.textContent=pct+"%";
-  const hw=document.getElementById("homeProgressWeeks");if(hw)hw.textContent=complete+" / 52 semaines";
-  const next=weeks.find(x=>!state.done[x.w])||weeks[51];
-  const tl=document.getElementById("todayLabel");if(tl)tl.textContent="Semaine "+next.w;
-  const tg=document.getElementById("todayGoal");if(tg)tg.textContent=next.title;
-  const hl=document.getElementById("homeWeekLabel");if(hl)hl.textContent="Semaine "+next.w+" / 52";
-}
+function updateDashboard(){const complete=Object.values(state.done).filter(Boolean).length,pct=Math.round(complete/52*100);["progressBar","yearProgressBar"].forEach(id=>document.getElementById(id).style.width=pct+"%");["progressText","yearProgressText"].forEach(id=>document.getElementById(id).textContent=pct+"%");const next=weeks.find(x=>!state.done[x.w])||weeks[51];document.getElementById("todayLabel").textContent="Semaine "+next.w;document.getElementById("todayGoal").textContent=next.title}
+function openCurrent(){const next=weeks.find(x=>!state.done[x.w])||weeks[51];switchTab("year");setTimeout(()=>document.getElementById("week-"+next.w).scrollIntoView({behavior:"smooth",block:"center"}),150)}
+
+function renderWounds(){const host=document.getElementById("woundForms");for(let i=0;i<3;i++){const w=state.wounds[i]||{};const d=document.createElement("div");d.className="card";d.style.margin="12px 0";d.innerHTML=`<h3>Blessure ${i+1}</h3>${wf(i,"event","Fait précis",w.event)}${wf(i,"emotion","Émotion ressentie",w.emotion)}${wf(i,"meaning","Interprétation que j'en ai faite",w.meaning)}${wf(i,"need","Ce dont j'aurais besoin aujourd'hui",w.need)}${wf(i,"action","Petite correction concrète à tester",w.action)}`;host.appendChild(d)}}
+function wf(i,k,l,v){return `<div class="field"><label>${l}</label><textarea oninput="state.wounds[${i}]['${k}']=this.value;save()">${esc(v)}</textarea></div>`}
+
+function renderWeekly(){const s=document.getElementById("weeklySelect");weeks.forEach(x=>s.insertAdjacentHTML("beforeend",`<option value="${x.w-1}">Semaine ${x.w} — ${x.title}</option>`));s.addEventListener("change",renderWeeklyForm);renderWeeklyForm()}
+function renderWeeklyForm(){const i=Number(document.getElementById("weeklySelect").value||0),host=document.getElementById("weeklyForm");host.innerHTML=weeklyQs.map((q,j)=>`<div class="field"><label>${q}</label><textarea oninput="state.weekly[${i}]['q${j}']=this.value;save()">${esc((state.weekly[i]||{})["q"+j])}</textarea></div>`).join("")}
+
+function renderMonthly(){const s=document.getElementById("monthlySelect");for(let i=0;i<12;i++)s.insertAdjacentHTML("beforeend",`<option value="${i}">Mois ${i+1}</option>`);s.addEventListener("change",renderMonthlyForm);renderMonthlyForm()}
+function renderMonthlyForm(){const i=Number(document.getElementById("monthlySelect").value||0),host=document.getElementById("monthlyForm");host.innerHTML=monthlyQs.map((q,j)=>`<div class="field"><label>${q}</label><textarea oninput="state.monthly[${i}]['q${j}']=this.value;save()">${esc((state.monthly[i]||{})["q"+j])}</textarea></div>`).join("")}
+
+function setup(){document.getElementById("weeklyGoal").value=state.weeklyGoal||"";document.getElementById("weeklyGoal").addEventListener("input",e=>{state.weeklyGoal=e.target.value;save()});document.querySelectorAll("[data-daily]").forEach(c=>{c.checked=!!state.daily[c.dataset.daily];c.addEventListener("change",e=>{state.daily[c.dataset.daily]=e.target.checked;save()})});["gratitude","failure","wound","grace"].forEach(k=>{const e=document.getElementById("sp_"+k);e.value=state.spiritual[k]||"";e.addEventListener("input",x=>{state.spiritual[k]=x.target.value;save()})});["security","dialogue","affection","repair","trust"].forEach(k=>{const e=document.getElementById("m_"+k);e.value=state.metrics[k]??5;e.nextElementSibling.textContent=e.value;e.addEventListener("input",x=>{state.metrics[k]=Number(x.target.value);x.target.nextElementSibling.textContent=x.target.value;save()})})}
+function resetAll(){if(confirm("Effacer toutes les réponses et toute la progression ?")){localStorage.removeItem(key);location.reload()}}
+function backupMsg(txt,ok){const el=document.getElementById("backupMsg");if(!el)return;el.style.color=ok===false?"var(--danger)":"var(--olive)";el.textContent=txt;clearTimeout(backupMsg._t);backupMsg._t=setTimeout(()=>{el.textContent=""},6000)}
 function exportData(){
-  const data=localStorage.getItem(key)||JSON.stringify(state);
-  const blob=new Blob([data],{type:"application/json"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="kaizen-mariage-sauvegarde.json";
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  try{
+    const payload={app:"kaizen-mariage",version:1,exportedAt:new Date().toISOString(),data:JSON.parse(localStorage.getItem(key)||JSON.stringify(state))};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob),a=document.createElement("a"),d=new Date(),p=n=>String(n).padStart(2,"0");
+    a.href=url;a.download=`kaizen-mariage-sauvegarde-${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}.json`;
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+    backupMsg("Sauvegarde exportée : conservez ce fichier en lieu sûr.");
+  }catch(e){backupMsg("Export impossible : "+e.message,false)}
 }
-function importData(event){
-  const file=event.target.files?.[0];
-  if(!file) return;
+function importData(input){
+  const file=input.files&&input.files[0];if(!file){return}
   const reader=new FileReader();
-  reader.onload=()=>{
+  reader.onload=e=>{
     try{
-      const parsed=JSON.parse(reader.result);
-      localStorage.setItem(key,JSON.stringify(parsed));
-      alert("Sauvegarde restaurée. L'application va se recharger.");
+      let obj=JSON.parse(e.target.result);
+      if(obj&&obj.app==="kaizen-mariage"&&obj.data){obj=obj.data}
+      if(!obj||typeof obj!=="object"||Array.isArray(obj))throw new Error("format inattendu");
+      if(!confirm("Remplacer les données actuelles par cette sauvegarde ? Cette action est irréversible.")){input.value="";return}
+      localStorage.setItem(key,JSON.stringify(obj));
       location.reload();
-    }catch(e){alert("Ce fichier de sauvegarde n'est pas valide.");}
+    }catch(err){backupMsg("Fichier de sauvegarde illisible ("+err.message+").",false)}
+    input.value="";
   };
+  reader.onerror=()=>{backupMsg("Lecture du fichier impossible.",false);input.value=""};
   reader.readAsText(file);
 }
-function setupTheme(){
-  const saved=localStorage.getItem("kaizenTheme");
-  if(saved==="dark") document.body.classList.add("dark");
-  const btn=document.getElementById("themeToggle");
-  if(btn){
-    btn.textContent=document.body.classList.contains("dark")?"☀":"☾";
-    btn.addEventListener("click",()=>{
-      document.body.classList.toggle("dark");
-      localStorage.setItem("kaizenTheme",document.body.classList.contains("dark")?"dark":"light");
-      btn.textContent=document.body.classList.contains("dark")?"☀":"☾";
-    });
-  }
+
+/* ---- Historique : journal daté + versions des notes de semaine ---- */
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function fmtDate(ts){try{return new Date(ts).toLocaleString("fr-FR",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(e){return ""}}
+
+let journalEditId=null;
+function renderJournal(){
+  const host=document.getElementById("journalList");if(!host)return;
+  const entries=(state.journalEntries||[]).slice().sort((a,b)=>b.ts-a.ts);
+  if(!entries.length){host.innerHTML='<div class="empty">Aucune entrée pour l\'instant — écrivez votre première note ci-dessus.</div>';return;}
+  host.innerHTML=entries.map(e=>{
+    if(journalEditId===e.id){
+      return `<div class="entry"><div class="entry-head"><span class="entry-date">${fmtDate(e.ts)}</span></div>`
+        +`<textarea id="jedit-${e.id}">${esc(e.text)}</textarea>`
+        +`<div class="row" style="margin-top:8px"><button class="secondary" onclick="cancelJournalEdit()">Annuler</button> <button class="primary" onclick="saveJournalEdit('${e.id}')">Enregistrer</button></div></div>`;
+    }
+    return `<div class="entry"><div class="entry-head"><span class="entry-date">${fmtDate(e.ts)}</span>`
+      +`<span class="entry-actions"><button class="icon-btn" onclick="startJournalEdit('${e.id}')">Modifier</button>`
+      +`<button class="icon-btn del" onclick="deleteJournalEntry('${e.id}')">Supprimer</button></span></div>`
+      +`<div class="entry-text">${esc(e.text)}</div></div>`;
+  }).join("");
+}
+function addJournalEntry(){
+  const ta=document.getElementById("journalInput");if(!ta)return;
+  const t=(ta.value||"").trim();if(!t)return;
+  state.journalEntries=state.journalEntries||[];
+  state.journalEntries.push({id:uid(),ts:Date.now(),text:t});
+  ta.value="";save();renderJournal();
+}
+function startJournalEdit(id){journalEditId=id;renderJournal();const el=document.getElementById("jedit-"+id);if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length);}}
+function cancelJournalEdit(){journalEditId=null;renderJournal();}
+function saveJournalEdit(id){
+  const el=document.getElementById("jedit-"+id);if(!el)return;
+  const t=(el.value||"").trim();
+  if(!t){state.journalEntries=(state.journalEntries||[]).filter(x=>x.id!==id);}
+  else{const e=(state.journalEntries||[]).find(x=>x.id===id);if(e)e.text=t;}
+  journalEditId=null;save();renderJournal();
+}
+function deleteJournalEntry(id){
+  if(!confirm("Supprimer cette entrée du journal ?"))return;
+  state.journalEntries=(state.journalEntries||[]).filter(x=>x.id!==id);
+  save();renderJournal();
 }
 
-function resetAll(){if(confirm("Effacer toutes les réponses et toute la progression ?")){localStorage.removeItem(key);location.reload()}}
+const histOpen=new Set();
+function commitWeekNote(w,val){
+  val=(val||"").trim();if(!val)return;
+  state.notesHistory=state.notesHistory||{};
+  const arr=state.notesHistory[w]=state.notesHistory[w]||[];
+  const last=arr[arr.length-1];
+  if(last&&last.text===val)return;
+  arr.push({ts:Date.now(),text:val});
+  save();renderNoteHist(w);
+}
+function toggleHist(w){const k=String(w);if(histOpen.has(k))histOpen.delete(k);else histOpen.add(k);renderNoteHist(w);}
+function renderNoteHist(w){
+  const host=document.querySelector('.note-hist[data-w="'+w+'"]');if(!host)return;
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];const n=arr.length;
+  if(!n){host.innerHTML="";return;}
+  const open=histOpen.has(String(w));
+  let html=`<button type="button" class="hist-toggle" onclick="toggleHist(${w})">${open?"▾":"▸"} Historique des versions (${n})</button>`;
+  if(open){
+    html+='<div class="hist-list">'+arr.map((v,i)=>({v:v,i:i})).reverse().map(o=>
+      `<div class="hist-item"><div class="hist-date">${fmtDate(o.v.ts)}</div><div class="hist-text">${esc(o.v.text)}</div>`
+      +`<div class="hist-actions"><button class="icon-btn" onclick="restoreWeekNote(${w},${o.i})">Restaurer</button>`
+      +`<button class="icon-btn del" onclick="deleteWeekVersion(${w},${o.i})">Supprimer</button></div></div>`
+    ).join("")+"</div>";
+  }
+  host.innerHTML=html;
+}
+function restoreWeekNote(w,idx){
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];const v=arr[idx];if(!v)return;
+  state.notes[w]=v.text;
+  const card=document.getElementById("week-"+w);
+  if(card){const ta=card.querySelector("textarea");if(ta)ta.value=v.text;}
+  save();
+}
+function deleteWeekVersion(w,idx){
+  if(!confirm("Supprimer cette version ?"))return;
+  const arr=(state.notesHistory&&state.notesHistory[w])||[];arr.splice(idx,1);
+  save();renderNoteHist(w);
+}
 
-renderWeeks();renderWounds();renderWeekly();renderMonthly();setup();setupTheme();updateDashboard();
+renderWeeks();renderWounds();renderWeekly();renderMonthly();setup();renderJournal();weeks.forEach(x=>renderNoteHist(x.w));updateDashboard();
+(function(){const ji=document.getElementById("journalInput");if(ji)ji.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();addJournalEntry();}});})();
 document.querySelectorAll("[data-mobile-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.mobileTab)));
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}
-
 </script>
+<script>
+(function(){
+  var root=document.documentElement, tkey="kaizenTheme";
+  var meta=document.querySelector('meta[name="theme-color"]');
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 7 7 0 1 0 20 14.5z"/></svg>';
+  function apply(t){
+    root.setAttribute("data-theme",t);
+    if(meta) meta.setAttribute("content", t==="dark" ? "#181310" : "#5a3a28");
+    var b=document.getElementById("themeToggle"); if(b) b.innerHTML = (t==="dark"? SUN : MOON);
+  }
+  var saved=null; try{saved=localStorage.getItem(tkey);}catch(e){}
+  var t = saved || ((window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light");
+  apply(t);
+  var tb=document.getElementById("themeToggle");
+  if(tb) tb.addEventListener("click",function(){
+    t = (root.getAttribute("data-theme")==="dark") ? "light" : "dark";
+    try{localStorage.setItem(tkey,t);}catch(e){}
+    apply(t);
+  });
 
-<style>
-/* V4 hero: image and text are independently controlled */
-@media(min-width:781px){
-  .hero-copy{max-width:47%}
-  .hero-media{left:43%}
-  .hero-media img{object-position:center center}
-}
-@media(max-width:780px){
-  .hero-home{
-    min-height:560px;
-    padding:20px 17px 106px;
-    background:#fff8ea;
+  function fillRange(el){ var mn=+el.min||0, mx=+el.max||100, v=+el.value; el.style.setProperty("--p", ((v-mn)/(mx-mn)*100)+"%"); }
+  var mIds=["m_security","m_dialogue","m_affection","m_repair","m_trust"];
+  function updateAvg(){
+    var g=document.getElementById("metricGauge"); if(!g) return;
+    var s=0,n=0; mIds.forEach(function(id){var e=document.getElementById(id); if(e){s+=(+e.value);n++;}});
+    var avg = n? s/n : 0, pct=Math.round(avg/10*100);
+    g.style.setProperty("--g", pct+"%");
+    var lbl=document.getElementById("metricGaugeVal"); if(lbl) lbl.textContent=avg.toFixed(1);
   }
-  .hero-media{
-    inset:0;
-  }
-  .hero-media img{
-    object-position:63% center;
-  }
-  .hero-home::after{
-    background:
-      linear-gradient(90deg,rgba(255,249,235,.98) 0%,rgba(255,249,235,.93) 37%,rgba(255,249,235,.48) 58%,rgba(255,249,235,.05) 82%),
-      linear-gradient(0deg,rgba(255,249,235,.40) 0%,rgba(255,249,235,0) 35%);
-  }
-  .hero-copy{
-    max-width:64%;
-  }
-  .hero-copy blockquote{
-    font-size:clamp(27px,7.3vw,35px);
-    line-height:1.08;
-  }
-  .hero-ref{font-size:12px}
-  .enc-title{font-size:12px}
-  .enc-text{
-    max-width:96%;
-    font-size:13px;
-    line-height:1.45;
-  }
-}
-@media(max-width:430px){
-  .hero-home{min-height:535px}
-  .hero-copy{max-width:66%}
-  .hero-media img{object-position:66% center}
-  .hero-copy blockquote{font-size:clamp(25px,7vw,32px)}
-}
-</style>
-
-
-<style>
-.ui-icon,.nav-icon,.brand-mark img,.eyebrow-icon,.enc-icon{
-  display:block;
-  width:1em;
-  height:1em;
-}
-.brand-mark img{width:26px;height:26px;color:#b58024}
-.brand-mark img,.ui-icon,.nav-icon,.eyebrow-icon,.enc-icon{filter:none}
-.quick-heading strong{display:flex;align-items:center;gap:8px}
-.heading-icon{width:22px;height:22px;color:#c68f24}
-.quick-icon{width:38px;height:38px;margin-bottom:2px}
-.q1 .quick-icon{color:#b51f35}
-.q2 .quick-icon{color:#1f7a4e}
-.q3 .quick-icon{color:#8052be}
-.q4 .quick-icon{color:#b47712}
-.shield{display:grid;place-items:center}.shield-icon{width:28px;height:28px;color:#b87f16}
-.bottom-nav .nav-icon{width:24px;height:24px;margin:0 auto 3px;color:#777}
-.bottom-nav button.active .nav-icon{color:#841b2d}
-.eyebrow{display:inline-flex;align-items:center;gap:7px}.eyebrow-icon{width:18px;height:18px}
-.enc-title{display:flex;align-items:center;gap:7px}.enc-icon{width:18px;height:18px;color:#841b2d}
-@media(max-width:780px){
-  .bottom-nav .nav-icon{width:23px;height:23px}
-  .quick-icon{width:34px;height:34px}
-}
-</style>
-
-
-<style>
-.guide-cta{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  gap:14px;
-}
-.guide-cta-icon{
-  width:44px;height:44px;border-radius:14px;
-  background:#fff3dc;color:#a97518;
-  display:grid;place-items:center;
-}
-.guide-cta-icon img{width:24px;height:24px}
-.guide-cta-copy{display:grid;gap:3px}
-.guide-cta-copy strong{color:#761729}
-.guide-cta-copy span{font-size:13px;color:var(--muted)}
-.guide-link{align-self:center}
-.guide-list{margin:8px 0 12px;padding-left:20px;line-height:1.6}
-.guide-list li{margin:3px 0}
-.guide-week{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.guide-week>div{background:#fbf6ef;border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:5px}
-.guide-week span{font-size:12px;font-weight:900;color:#a36b18;text-transform:uppercase;letter-spacing:.05em}
-.guide-week strong{color:#7a1829}
-.guide-week small{color:var(--muted);line-height:1.4}
-.dark .guide-week>div{background:#2b2521}
-@media(max-width:780px){
-  .guide-cta{grid-template-columns:auto 1fr}
-  .guide-link{grid-column:2;justify-self:start;padding-left:0}
-  .guide-week{grid-template-columns:1fr 1fr}
-}
-@media(max-width:430px){
-  .guide-week{grid-template-columns:1fr}
-}
-</style>
-
+  document.querySelectorAll('input[type=range]').forEach(function(r){
+    fillRange(r);
+    r.addEventListener("input", function(){ fillRange(r); updateAvg(); });
+  });
+  updateAvg();
+})();
+</script>
 </body>
 </html>
-
-
-<style>
-.week-illustration{
-  width:100%;
-  height:145px;
-  object-fit:cover;
-  border-radius:15px;
-  border:1px solid var(--line);
-}
-.asset-showcase{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:10px;
-}
-.asset-showcase img{
-  width:100%;
-  aspect-ratio:1.15/1;
-  object-fit:cover;
-  border-radius:14px;
-}
-</style>
-
-<style>
-@media(min-width:781px){
-  .hero-home{min-height:520px}
-  .hero-media{left:43%;right:0}
-  .hero-media img{object-position:50% 48%}
-  .hero-copy{max-width:48%}
-}
-@media(max-width:780px){
-  .hero-media{inset:0}
-  .hero-media img{object-position:60% center}
-}
-</style>
