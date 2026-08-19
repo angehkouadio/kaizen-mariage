@@ -211,6 +211,7 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <button class="tab-btn" data-tab="wounds">Blessures</button>
 <button class="tab-btn" data-tab="weekly">Réunion hebdo</button>
 <button class="tab-btn" data-tab="monthly">Bilan mensuel</button>
+<button class="tab-btn" data-tab="guide">Guide</button>
 <button class="tab-btn" data-tab="metrics">Suivi</button>
 </nav>
 
@@ -253,6 +254,16 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
       <button class="quick-tile q4" onclick="switchTab('metrics')"><img src="./assets/icons/progress.svg" alt="" class="ui-icon quick-icon" aria-hidden="true"><strong>Suivi</strong><small>Mes progrès et bilans</small></button>
     </div>
   </section>
+
+<section class="home-card guide-cta">
+  <div class="guide-cta-icon"><img src="./assets/icons/book.svg" alt=""></div>
+  <div class="guide-cta-copy">
+    <strong>Comment utiliser l’outil ?</strong>
+    <span>Commencer, travailler une semaine, faire les bilans et sauvegarder vos données.</span>
+  </div>
+  <button class="link-button guide-link" onclick="switchTab('guide')">Ouvrir le guide ›</button>
+</section>
+
 
   <section class="disclaimer-card">
     <span class="shield"><img src="./assets/icons/shield.svg" alt="" class="ui-icon shield-icon" aria-hidden="true"></span>
@@ -382,6 +393,127 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <section class="panel" id="monthly"><div class="card"><h2>Bilan mensuel — 45 à 60 minutes</h2><p class="muted">Choisissez le mois puis faites le bilan ensemble.</p>
 <div class="field"><label>Mois</label><select id="monthlySelect"></select></div><div id="monthlyForm"></div></div></section>
 
+
+<section class="panel" id="guide">
+<div class="grid">
+
+  <div class="card span-12 guide-hero">
+    <span class="badge">Guide d’utilisation</span>
+    <h2 style="margin-top:12px">Comment utiliser Kaizen du Mariage</h2>
+    <p class="muted">L’outil est conçu comme un parcours d’un an. Il ne faut pas chercher à tout faire en même temps. Travaillez une semaine à la fois, notez ce qui se passe réellement dans votre couple, puis ajustez progressivement.</p>
+    <div class="quote"><strong>Rythme conseillé :</strong> 10 à 20 minutes par jour + une réunion de couple de 30 à 45 minutes par semaine + un bilan mensuel.</div>
+  </div>
+
+  <div class="card span-6">
+    <h3>1. Commencer le parcours</h3>
+    <p>Depuis <strong>Accueil</strong>, appuyez sur <strong>Continuer mon parcours</strong>. L’application vous conduit vers la première semaine non terminée.</p>
+    <p>Chaque semaine contient :</p>
+    <ul class="guide-list">
+      <li>un objectif relationnel ;</li>
+      <li>un exercice concret à tester ;</li>
+      <li>un exercice spirituel ;</li>
+      <li>un espace pour noter ce que vous observez.</li>
+    </ul>
+    <p class="muted small">Ne cochez une semaine comme terminée que lorsque vous avez réellement essayé l’exercice.</p>
+  </div>
+
+  <div class="card span-6">
+    <h3>2. Travailler une blessure</h3>
+    <p>Dans <strong>Blessures</strong>, choisissez au maximum trois blessures actives. Pour chacune, séparez :</p>
+    <ul class="guide-list">
+      <li>le fait précis ;</li>
+      <li>l’émotion ressentie ;</li>
+      <li>l’interprétation que vous en avez faite ;</li>
+      <li>le besoin actuel ;</li>
+      <li>la petite correction concrète à tester.</li>
+    </ul>
+    <p>Une blessure ancienne n’a pas besoin d’être « réglée » en une seule conversation. L’objectif est de diminuer progressivement son impact sur la relation.</p>
+  </div>
+
+  <div class="card span-6">
+    <h3>3. Utiliser la Vie spirituelle</h3>
+    <p>L’onglet <strong>Vie spirituelle</strong> propose un rituel quotidien de 10 à 15 minutes :</p>
+    <ol class="guide-list">
+      <li>se mettre en présence de Dieu ;</li>
+      <li>lire un court passage biblique ;</li>
+      <li>faire un examen du cœur ;</li>
+      <li>exprimer une gratitude ;</li>
+      <li>demander une grâce ;</li>
+      <li>terminer par une prière commune.</li>
+    </ol>
+    <p class="muted small">La prière ne remplace pas une demande de pardon, une limite saine ou un changement de comportement.</p>
+  </div>
+
+  <div class="card span-6">
+    <h3>4. Faire la réunion hebdomadaire</h3>
+    <p>Une fois par semaine, ouvrez <strong>Réunion hebdo</strong> et choisissez la semaine concernée.</p>
+    <p>Répondez ensemble aux questions, en commençant par ce qui a été positif. Cherchez ensuite le cycle qui revient et choisissez <strong>une seule petite amélioration</strong> pour la semaine suivante.</p>
+    <div class="quote">La question importante n’est pas seulement : « Avons-nous eu un conflit ? » mais : « L’avons-nous mieux géré que la fois précédente ? »</div>
+  </div>
+
+  <div class="card span-6">
+    <h3>5. Faire le bilan mensuel</h3>
+    <p>Dans <strong>Bilan mensuel</strong>, faites une pause toutes les quatre semaines environ pour observer les tendances :</p>
+    <ul class="guide-list">
+      <li>ce qui s’améliore ;</li>
+      <li>la blessure qui se réactive le plus ;</li>
+      <li>le cycle négatif encore présent ;</li>
+      <li>ce qui a été mieux géré ;</li>
+      <li>la priorité du mois suivant.</li>
+    </ul>
+  </div>
+
+  <div class="card span-6">
+    <h3>6. Suivre les progrès</h3>
+    <p>Dans <strong>Suivi</strong>, attribuez une note de 0 à 10 à cinq dimensions :</p>
+    <ul class="guide-list">
+      <li>sécurité émotionnelle ;</li>
+      <li>qualité du dialogue ;</li>
+      <li>affection et proximité ;</li>
+      <li>capacité à réparer ;</li>
+      <li>confiance.</li>
+    </ul>
+    <p>Ces notes servent à observer une tendance. Elles ne doivent jamais devenir une note donnée à votre conjoint.</p>
+  </div>
+
+  <div class="card span-6">
+    <h3>7. Quand faire une pause ?</h3>
+    <p>Si la discussion devient trop intense, utilisez une pause annoncée :</p>
+    <div class="quote">« Je suis trop bouleversé pour continuer correctement. J’ai besoin d’une pause. Je ne t’abandonne pas. Nous reprendrons cette discussion. »</div>
+    <p>La pause doit être suivie d’un retour réel au dialogue. Le silence punitif n’est pas une pause Kaizen.</p>
+  </div>
+
+  <div class="card span-6">
+    <h3>8. Sauvegarder vos réponses</h3>
+    <p>Les données sont enregistrées localement dans le navigateur du téléphone ou de l’ordinateur utilisé.</p>
+    <p>Dans <strong>Suivi → Sauvegarde de mes données</strong> :</p>
+    <ul class="guide-list">
+      <li><strong>Exporter ma sauvegarde</strong> crée un fichier JSON ;</li>
+      <li><strong>Restaurer une sauvegarde</strong> recharge ce fichier sur un autre appareil.</li>
+    </ul>
+    <p class="muted small">Faites régulièrement un export si les notes sont importantes pour vous.</p>
+  </div>
+
+  <div class="card span-12">
+    <h3>Le bon rythme sur une semaine</h3>
+    <div class="guide-week">
+      <div><span>Jour 1</span><strong>Lire l’objectif</strong><small>Comprendre l’exercice de la semaine.</small></div>
+      <div><span>Jours 2–5</span><strong>Tester</strong><small>Mettre en pratique la petite correction.</small></div>
+      <div><span>Jour 6</span><strong>Observer</strong><small>Noter ce qui a aidé ou aggravé la situation.</small></div>
+      <div><span>Jour 7</span><strong>Faire le bilan</strong><small>Réunion hebdomadaire et prochaine amélioration.</small></div>
+    </div>
+  </div>
+
+  <div class="card span-12">
+    <h3>Ce que l’outil ne doit pas devenir</h3>
+    <p>Il ne doit pas servir à comptabiliser les fautes de l’autre, imposer un pardon immédiat, prouver qui fait le plus d’efforts ou forcer une conversation lorsque l’un des deux ne se sent pas en sécurité.</p>
+    <p>Lorsque les conflits impliquent violence, peur, menace, coercition ou danger, la priorité est la sécurité et l’aide professionnelle appropriée.</p>
+    <button class="primary" onclick="openCurrent()">Continuer mon parcours</button>
+  </div>
+
+</div>
+</section>
+
 <section class="panel" id="metrics">
 <div class="grid"><div class="card span-12"><h2>Indicateurs de la relation</h2><p class="muted">De 0 à 10. Le but est d'observer une tendance, pas de noter votre conjoint.</p>
 <div class="slider-row"><label>Sécurité émotionnelle</label><input type="range" min="0" max="10" id="m_security"><output>5</output></div>
@@ -408,7 +540,7 @@ body.dark .app-header{background:#211b18;border-color:#40352f}.dark .brand-title
 <nav class="bottom-nav" aria-label="Navigation mobile">
   <button data-mobile-tab="home" class="active"><img src="./assets/icons/home.svg" class="nav-icon" alt=""><span>Accueil</span></button>
   <button data-mobile-tab="year"><img src="./assets/icons/journey.svg" class="nav-icon" alt=""><span>Parcours</span></button>
-  <button data-mobile-tab="spiritual"><img src="./assets/icons/cross.svg" class="nav-icon" alt=""><span>Prière</span></button>
+  <button data-mobile-tab="spiritual"><img src="./assets/icons/prayer.svg" class="nav-icon" alt=""><span>Prière</span></button>
   <button data-mobile-tab="wounds"><img src="./assets/icons/heart.svg" class="nav-icon" alt=""><span>Blessures</span></button>
   <button data-mobile-tab="metrics"><img src="./assets/icons/progress.svg" class="nav-icon" alt=""><span>Suivi</span></button>
 </nav>
@@ -632,6 +764,42 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 @media(max-width:780px){
   .bottom-nav .nav-icon{width:23px;height:23px}
   .quick-icon{width:34px;height:34px}
+}
+</style>
+
+
+<style>
+.guide-cta{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+}
+.guide-cta-icon{
+  width:44px;height:44px;border-radius:14px;
+  background:#fff3dc;color:#a97518;
+  display:grid;place-items:center;
+}
+.guide-cta-icon img{width:24px;height:24px}
+.guide-cta-copy{display:grid;gap:3px}
+.guide-cta-copy strong{color:#761729}
+.guide-cta-copy span{font-size:13px;color:var(--muted)}
+.guide-link{align-self:center}
+.guide-list{margin:8px 0 12px;padding-left:20px;line-height:1.6}
+.guide-list li{margin:3px 0}
+.guide-week{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.guide-week>div{background:#fbf6ef;border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:5px}
+.guide-week span{font-size:12px;font-weight:900;color:#a36b18;text-transform:uppercase;letter-spacing:.05em}
+.guide-week strong{color:#7a1829}
+.guide-week small{color:var(--muted);line-height:1.4}
+.dark .guide-week>div{background:#2b2521}
+@media(max-width:780px){
+  .guide-cta{grid-template-columns:auto 1fr}
+  .guide-link{grid-column:2;justify-self:start;padding-left:0}
+  .guide-week{grid-template-columns:1fr 1fr}
+}
+@media(max-width:430px){
+  .guide-week{grid-template-columns:1fr}
 }
 </style>
 
